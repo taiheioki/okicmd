@@ -1,2 +1,2 @@
-# latex_template
+# latex-template
 My template for LaTeX documents
