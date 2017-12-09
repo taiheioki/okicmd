@@ -1,0 +1,52 @@
+\RequirePackage[l2tabu, orthodox]{nag}
+\documentclass[a4paper]{article}
+
+% margin
+\usepackage[top=1truein, bottom=1truein, left=1truein, right=1truein]{geometry}
+
+% fonts
+\usepackage{type1cm}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% math symbols
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{mathtools}
+
+% hyperref
+\usepackage[bookmarksnumbered=true, hypertexnames=false, pdfdisplaydoctitle=true, setpagesize=false]{hyperref}
+\usepackage{url}
+
+% cleveref
+\usepackage{cleveref}
+\usepackage{autonum}
+
+% set the title and author style
+\usepackage[en-US]{datetime2}
+
+% okicmd.sty
+\usepackage{okicmd}
+\usepackage{okithm}
+
+\title{A Template for English LaTeX Documents}
+\author{Author Name}
+
+\hypersetup{
+  pdftitle={\@title},
+  pdfauthor={\@author},
+  pdfkeywords={},
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Test}
+test
+
+\bibliographystyle{abbrv}
+\bibliography{\jobname}
+
+\end{document}
