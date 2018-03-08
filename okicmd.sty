@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2017/12/09 v0.17]
+\ProvidesPackage{okicmd}[2018/03/08 v0.18]
 
 \RequirePackage{amsmath}
 \RequirePackage{dsfont}
@@ -141,7 +141,9 @@
 \newcommand\adjo[1]{#1^{*}}
 
 % ======== Analytics ========
-\newcommand\dif[2]{\dfrac{\mathrm{d} {#1}}{\mathrm{d} {#2}}}
+\newcommand\e{\mathrm{e}}
+\renewcommand\d{\mathrm{d}}
+\newcommand\dif[2]{\dfrac{\d{#1}}{\d{#2}}}
 \newcommand\pdif[2]{\dfrac{\partial{#1}}{\partial{#2}}}
 
 % ======== Number Theory ========

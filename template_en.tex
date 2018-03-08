@@ -1,5 +1,5 @@
 \RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[a4paper]{article}
+\documentclass[a4paper, 11pt]{article}
 
 % margin
 \usepackage[top=1truein, bottom=1truein, left=1truein, right=1truein]{geometry}
@@ -20,7 +20,7 @@
 \usepackage{url}
 
 % cleveref
-\usepackage{cleveref}
+\usepackage[capitalize]{cleveref}
 \usepackage{autonum}
 
 % set the title and author style
@@ -33,18 +33,35 @@
 \title{A Template for English LaTeX Documents}
 \author{Author Name}
 
+\makeatletter
 \hypersetup{
   pdftitle={\@title},
   pdfauthor={\@author},
-  pdfkeywords={},
+  pdfsubject={},
+  pdfkeywords={}
 }
+\makeatletter
 
 \begin{document}
 
 \maketitle
 
+% ======== START OF CONTENTS ========
+
 \section{Test}
 test
+
+\begin{theorem} \label{thm:pi}
+  It holds
+  %
+  \begin{align} \label{eq:pi}
+    \pi = 3.
+  \end{align}
+\end{theorem}
+
+The theorem and the equation can be referenced as \cref{thm:pi} and~\eqref{eq:pi}, respectively.
+
+% ======== END OF CONTENTS ========
 
 \bibliographystyle{abbrv}
 \bibliography{\jobname}
