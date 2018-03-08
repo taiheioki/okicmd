@@ -1,56 +1,63 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2017/08/12 v0.13]
+\ProvidesPackage{okithm}[2018/03/08 v0.14]
 
+
+% ======== Options ========
+\RequirePackage{kvoptions}
+
+\DeclareBoolOption[true]{theorem}
+\DeclareComplementaryOption{notheorem}{theorem}
+\DeclareStringOption[section]{numberwithin}
+\DeclareStringOption[long]{optstyle}
+\ProcessKeyvalOptions*{}
+
+
+% ======== Theorems ========
 \RequirePackage{amsthm}
 \RequirePackage{thmtools}
 
-% rewrite begintheorem (for framing)
-\def\@begintheorem#1#2[#3]{%
-  \deferred@thm@head{%
-    \global\def\thmheader{%
-      \@ifempty{#1}{\let\thmname\@gobble}{\let\thmname\@iden}%
-      \@ifempty{#2}{\let\thmnumber\@gobble}{\let\thmnumber\@iden}%
-      \@ifempty{#3}{\let\thmnote\@gobble}{\let\thmnote\@iden}%
-      \the\thm@headfont%
-      \thm@indent%
-      \thm@swap\swappedhead\thmhead{#1}{#2}{#3}%
-      \the\thm@headpunct%
-      \thmheadnl%
-      \hskip\thm@headsep%
-      \thmt@style@bodyfont%
-    }%
-  }%
-}
+\ifokithm@theorem
+  \declaretheoremstyle[
+    bodyfont=\normalfont\itshape,
+    postheadspace=5pt,
+    spaceabove=0.3\baselineskip,
+    spacebelow=0.3\baselineskip,
+  ]{thmstyle}
 
-\def\@endtheorem{\endtrivlist}
+  \declaretheoremstyle[
+    postheadspace=5pt,
+    spaceabove=0.3\baselineskip,
+    spacebelow=0.3\baselineskip,
+  ]{defstyle}
 
-\declaretheoremstyle[
-  postheadspace=5pt,
-  postheadhook=\thmheader,
-  spaceabove=0.3\baselineskip,
-  spacebelow=0.3\baselineskip,
-]{mystyle}
+  \declaretheoremstyle[
+    postheadspace=5pt,
+    spaceabove=0.3\baselineskip,
+    spacebelow=0.3\baselineskip,
+    qed=\qedsymbol,
+  ]{exstyle}
 
-\declaretheoremstyle[
-  postheadspace=5pt,
-  postheadhook=\thmheader,
-  spaceabove=0.3\baselineskip,
-  spacebelow=0.3\baselineskip,
-  qed=\qedsymbol,
-]{proof}
+  \declaretheoremstyle[
+    headfont=\normalfont\itshape,
+    postheadspace=5pt,
+    spaceabove=0.3\baselineskip,
+    spacebelow=0.3\baselineskip,
+    qed=\qedsymbol,
+  ]{proofstyle}
 
-\declaretheorem[name=Theorem,     style=mystyle, numberwithin=section]{theorem}
-\declaretheorem[name=Definition,  style=mystyle, sibling=theorem]{definition}
-\declaretheorem[name=Lemma,       style=mystyle, sibling=theorem]{lemma}
-\declaretheorem[name=Proposition, style=mystyle, sibling=theorem]{proposition}
-\declaretheorem[name=Corollary,   style=mystyle, sibling=theorem]{corollary}
-\declaretheorem[name=Example,     style=proof,   sibling=theorem]{example}
-\declaretheorem[name=Remark,      style=mystyle, sibling=theorem]{remark}
+  \declaretheorem[name=Theorem,     style=thmstyle, numberwithin=\okithm@numberwithin]{theorem}
+  \declaretheorem[name=Definition,  style=defstyle, sibling=theorem]{definition}
+  \declaretheorem[name=Lemma,       style=thmstyle, sibling=theorem]{lemma}
+  \declaretheorem[name=Proposition, style=thmstyle, sibling=theorem]{proposition}
+  \declaretheorem[name=Corollary,   style=thmstyle, sibling=theorem]{corollary}
+  \declaretheorem[name=Example,     style=exstyle,  sibling=theorem]{example}
+  \declaretheorem[name=Remark,      style=defstyle, sibling=theorem]{remark}
 
-% proof
-\let\proof\@undefined
-\let\endproof\@undefined
-\declaretheorem[name=Proof, style=proof, numbered=no]{proof}
+  % proof
+  \let\proof\@undefined
+  \let\endproof\@undefined
+  \declaretheorem[name=Proof, style=proofstyle, numbered=no]{proof}
+\fi
 
 
 % ======== Algorithm ========
@@ -68,18 +75,18 @@
 
 % ======== Optimization Problem ========
 \RequirePackage{array}
+\RequirePackage{ifthen}
 \RequirePackage{xkeyval}
 
 \declaretheoremstyle[
   headfont=\normalfont,
   postheadspace=1em,
-  postheadhook=\thmheader,
   headpunct={},
   headformat={\NUMBER},
   spaceabove=8pt,
   spacebelow=8pt,
 ]{optprobstyle}
-\declaretheorem[style=optprobstyle]{optprob}
+\declaretheorem[style=optprobstyle, numberwithin=\okithm@numberwithin]{optprob}
 
 \def\okithm@optprobtag#1{%
   \let\oldtheoptprob\theoptprob%
@@ -91,39 +98,77 @@
   }%
 }
 
-\define@key{Minimizekey}{name}[]{\def\name{#1}}
-\define@key{Minimizekey}{label}[]{\def\labelname{#1}}
-\define@key{Minimizekey}{variable}[]{\def\variable{#1}}
+\define@cmdkeys{Minimizekey}[optprob@]{name, label, variable}
+\define@choicekey*{Minimizekey}{style}[\val]{short,long}{\def\optprob@style{\val}}
 
-\def\okithm@makeoptprob#1#2#3#4{%
+\def\okithm@makeoptprob#1#2#3#4#5{%
+  % #1 : options
+  % #2 : minimize
+  % #3 : object function
+  % #4 : subject to
+  % #5 : constraints
   \setkeys{Minimizekey}{#1}%
-  \ifdefined\name%
-    \okithm@optprobtag{\name}%
+  \ifdefined\optprob@name%
+    \okithm@optprobtag{\optprob@name}%
   \fi%
   \begin{optprob}%
-    \ifdefined\labelname%
-      \label{\labelname}%
+    \ifdefined\optprob@label%
+      \label{\optprob@label}%
     \fi%
     \centering%
-    %\hypertarget{optprob.\theHoptprob}{}
-    \begin{tabular}{|ll}%
-      \ifdefined\variable%
-        $\underset{\variable}{\mathrm{#2}}$%
+    \okicmd@optprobhyperref{\theHoptprob}%
+    \begin{tabular}{|cl}%
+      \ifdefined\optprob@variable%
+        $\underset{\optprob@variable}{\mathrm{#2}}$%
       \else%
         #2%
       \fi%
       &\hspace{-1em}$\begin{array}[t]{l}\displaystyle#3\end{array}$ \\
-      subject to
-      &\hspace{-1em}$\begin{array}[t]{>{\displaystyle}l<{}>{\displaystyle}l<{}}#4\end{array}$
+      #4%
+      &\hspace{-1em}$\begin{array}[t]{>{\displaystyle}l<{}>{\displaystyle}l<{}}#5\end{array}$%
     \end{tabular}%
   \end{optprob}%
-  \let\name\undefined%
-  \let\labelname\undefined%
-  \let\variable\undefined%
+  \let\optprob@name\undefined%
+  \let\optprob@labelname\undefined%
+  \let\optprob@variable\undefined%
+  \let\optprob@style\undefined%
 }
 
-\newcommand\Minimize[3][]{\okithm@makeoptprob{#1}{minimize}{#2}{#3}}
-\newcommand\Maximize[3][]{\okithm@makeoptprob{#1}{maximize}{#2}{#3}}
+\def\okithm@DeclareOptProb#1#2#3#4#5{%
+  % #1 : name of the command
+  % #2 : minimize
+  % #3 : min
+  % #4 : subject to
+  % #5 : s.t.
+  \newcommand#1[3][]{%
+    \setkeys{Minimizekey}{##1}%
+    \ifdefined\optprob@style\else
+      \def\optprob@style{\okithm@optstyle}
+    \fi
+    \ifthenelse{\equal{\optprob@style}{long}}{%
+      \okithm@makeoptprob{##1}{#2}{##2}{#4}{##3}%
+    }{%
+      \okithm@makeoptprob{##1}{#3}{##2}{#5}{##3}%
+    }%
+  }%
+}
+
+\okithm@DeclareOptProb{\Minimize}{minimize}{min}{subject to}{s.t.}
+\okithm@DeclareOptProb{\Maximize}{maximize}{max}{subject to}{s.t.}
+
+% for hyperref
+\@ifpackageloaded{hyperref}{%
+  \def\okicmd@optprobhyperref#1{%
+    \hypertarget{optprob.#1}{}%
+  }%
+}{%
+  \def\okicmd@optprobhyperref#1{}%
+}
+
+% for cleveref
+\@ifpackageloaded{cleveref}{%
+  \crefname{optprob}{Problem}{Problems}
+}{}
 
 
 % ======== Enumeration ========

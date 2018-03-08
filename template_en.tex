@@ -40,7 +40,7 @@
   pdfsubject={},
   pdfkeywords={}
 }
-\makeatletter
+\makeatother
 
 \begin{document}
 
@@ -48,18 +48,43 @@
 
 % ======== START OF CONTENTS ========
 
-\section{Test}
-test
+\section{Theorems}
+
+\begin{definition}[Kurume ramen] \label{def:kurume-ramen}
+  A \emph{Kurume ramen} is a tonkotsu-based ramen originated in Kurume city of Fukuoka prefecture.
+\end{definition}
 
 \begin{theorem} \label{thm:pi}
-  It holds
-  %
-  \begin{align} \label{eq:pi}
-    \pi = 3.
-  \end{align}
+  Let $K$ be a set of Kurume ramens and $T$ a set of tonkotsu ramens.
+  Then it holds $K \subseteq T$.
 \end{theorem}
 
-The theorem and the equation can be referenced as \cref{thm:pi} and~\eqref{eq:pi}, respectively.
+\begin{proof}
+  Trivial from \cref{def:kurume-ramen}.
+\end{proof}
+
+
+\section{Optimization Problems}
+
+The following is an optimiation problem to get the best Kurume ramen.
+
+\Maximize[label=prob:a]{%
+  \inpr{C}{X}
+}{%
+  A(X) = b, \\
+  X \succeq O.
+}
+%
+\eqref{prob:a} is equivalent to the following problem:
+
+\Minimize[label=prob:b, variable={X}, style=short]{%
+  \sum_{i=1}^n \sum_{j=1}^n C_{i,j} X_{i,j}
+}{%
+  \sum_{i=1}^n \sum_{j=1}^n A^{(k)}_{i,j} X_{i,j} = b_k & \prn{k = 1, \ldots, m}, \\
+  X \succeq O.
+}
+
+
 
 % ======== END OF CONTENTS ========
 
