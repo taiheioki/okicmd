@@ -5,18 +5,21 @@
 % ======== Options ========
 \RequirePackage{kvoptions}
 
-\DeclareBoolOption[true]{theorem}
-\DeclareComplementaryOption{notheorem}{theorem}
+\DeclareBoolOption[true]{thm}
+\DeclareComplementaryOption{nothm}{thm}
+\DeclareBoolOption[true]{alg}
+\DeclareComplementaryOption{noalg}{alg}
 \DeclareStringOption[section]{numberwithin}
 \DeclareStringOption[long]{optstyle}
 \ProcessKeyvalOptions*{}
 
 
 % ======== Theorems ========
-\RequirePackage{amsthm}
-\RequirePackage{thmtools}
 
-\ifokithm@theorem
+\ifokithm@thm
+  \RequirePackage{amsthm}
+  \RequirePackage{thmtools}
+  
   \declaretheoremstyle[
     bodyfont=\normalfont\itshape,
     postheadspace=5pt,
@@ -61,114 +64,18 @@
 
 
 % ======== Algorithm ========
-\RequirePackage{algorithm}
-\RequirePackage[noend]{algpseudocode}
+\ifokithm@alg
+  \RequirePackage{algorithm}
+  \RequirePackage[noend]{algpseudocode}
 
-\algnewcommand\algorithmicinput{\makebox[\widthof{\textbf{Output}}][l]{\textbf{Input}}\textbf{:}}
-\algnewcommand\Input{\item[\algorithmicinput]}
-\algnewcommand\algorithmicoutput{\textbf{Output:}}
-\algnewcommand\Output{\item[\algorithmicoutput]}
+  \algnewcommand\algorithmicinput{\makebox[\widthof{\textbf{Output}}][l]{\textbf{Input}}\textbf{:}}
+  \algnewcommand\Input{\item[\algorithmicinput]}
+  \algnewcommand\algorithmicoutput{\textbf{Output:}}
+  \algnewcommand\Output{\item[\algorithmicoutput]}
 
-\algnewcommand\algorithmicto{\textbf{to}}
-\algdef{SE}[FOR]{ForTo}{EndFor}[2]{\algorithmicfor\ #1 \algorithmicto\ #2 \algorithmicdo}{\algorithmicend\ \algorithmicfor}\algtext*{EndFor}
-
-
-% ======== Optimization Problem ========
-\RequirePackage{array}
-\RequirePackage{ifthen}
-\RequirePackage{xkeyval}
-
-\declaretheoremstyle[
-  headfont=\normalfont,
-  postheadspace=1em,
-  headpunct={},
-  headformat={\NUMBER},
-  spaceabove=8pt,
-  spacebelow=8pt,
-]{optprobstyle}
-\declaretheorem[style=optprobstyle, numberwithin=\okithm@numberwithin]{optprob}
-
-\def\okithm@optprobtag#1{%
-  \let\oldtheoptprob\theoptprob%
-  \renewcommand{\theoptprob}{#1}%
-  \addtocounter{optprob}{-1}%
-  \@xa\let\csname theHoptprob\endcsname=\theHthmt@dummyctr%
-  \g@addto@macro\endoptprob{%
-    \global\let\theoptprob\oldtheoptprob%
-  }%
-}
-
-\define@cmdkeys{Minimizekey}[optprob@]{name, label, variable}
-\define@choicekey*{Minimizekey}{style}[\val]{short,long}{\def\optprob@style{\val}}
-
-\def\okithm@makeoptprob#1#2#3#4#5{%
-  % #1 : options
-  % #2 : minimize
-  % #3 : object function
-  % #4 : subject to
-  % #5 : constraints
-  \setkeys{Minimizekey}{#1}%
-  \ifdefined\optprob@name%
-    \okithm@optprobtag{\optprob@name}%
-  \fi%
-  \begin{optprob}%
-    \ifdefined\optprob@label%
-      \label{\optprob@label}%
-    \fi%
-    \centering%
-    \okicmd@optprobhyperref{\theHoptprob}%
-    \begin{tabular}{|cl}%
-      \ifdefined\optprob@variable%
-        $\underset{\optprob@variable}{\mathrm{#2}}$%
-      \else%
-        #2%
-      \fi%
-      &\hspace{-1em}$\begin{array}[t]{l}\displaystyle#3\end{array}$ \\
-      #4%
-      &\hspace{-1em}$\begin{array}[t]{>{\displaystyle}l<{}>{\displaystyle}l<{}}#5\end{array}$%
-    \end{tabular}%
-  \end{optprob}%
-  \let\optprob@name\undefined%
-  \let\optprob@labelname\undefined%
-  \let\optprob@variable\undefined%
-  \let\optprob@style\undefined%
-}
-
-\def\okithm@DeclareOptProb#1#2#3#4#5{%
-  % #1 : name of the command
-  % #2 : minimize
-  % #3 : min
-  % #4 : subject to
-  % #5 : s.t.
-  \newcommand#1[3][]{%
-    \setkeys{Minimizekey}{##1}%
-    \ifdefined\optprob@style\else
-      \def\optprob@style{\okithm@optstyle}
-    \fi
-    \ifthenelse{\equal{\optprob@style}{long}}{%
-      \okithm@makeoptprob{##1}{#2}{##2}{#4}{##3}%
-    }{%
-      \okithm@makeoptprob{##1}{#3}{##2}{#5}{##3}%
-    }%
-  }%
-}
-
-\okithm@DeclareOptProb{\Minimize}{minimize}{min}{subject to}{s.t.}
-\okithm@DeclareOptProb{\Maximize}{maximize}{max}{subject to}{s.t.}
-
-% for hyperref
-\@ifpackageloaded{hyperref}{%
-  \def\okicmd@optprobhyperref#1{%
-    \hypertarget{optprob.#1}{}%
-  }%
-}{%
-  \def\okicmd@optprobhyperref#1{}%
-}
-
-% for cleveref
-\@ifpackageloaded{cleveref}{%
-  \crefname{optprob}{Problem}{Problems}
-}{}
+  \algnewcommand\algorithmicto{\textbf{to}}
+  \algdef{SE}[FOR]{ForTo}{EndFor}[2]{\algorithmicfor\ #1 \algorithmicto\ #2 \algorithmicdo}{\algorithmicend\ \algorithmicfor}\algtext*{EndFor}
+\fi
 
 
 % ======== Enumeration ========

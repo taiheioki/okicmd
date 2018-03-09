@@ -30,6 +30,7 @@
 \usepackage{okicmd}
 \usepackage{okithm}
 
+
 \title{A Template for English LaTeX Documents}
 \author{Author Name}
 
@@ -50,9 +51,9 @@
 
 \section{Theorems}
 
-\begin{definition}[Kurume ramen] \label{def:kurume-ramen}
+\begin{theorem} \label{def:kurume-ramen}
   A \emph{Kurume ramen} is a tonkotsu-based ramen originated in Kurume city of Fukuoka prefecture.
-\end{definition}
+\end{theorem}
 
 \begin{theorem} \label{thm:pi}
   Let $K$ be a set of Kurume ramens and $T$ a set of tonkotsu ramens.
@@ -62,28 +63,6 @@
 \begin{proof}
   Trivial from \cref{def:kurume-ramen}.
 \end{proof}
-
-
-\section{Optimization Problems}
-
-The following is an optimiation problem to get the best Kurume ramen.
-
-\Maximize[label=prob:a]{%
-  \inpr{C}{X}
-}{%
-  A(X) = b, \\
-  X \succeq O.
-}
-%
-\eqref{prob:a} is equivalent to the following problem:
-
-\Minimize[label=prob:b, variable={X}, style=short]{%
-  \sum_{i=1}^n \sum_{j=1}^n C_{i,j} X_{i,j}
-}{%
-  \sum_{i=1}^n \sum_{j=1}^n A^{(k)}_{i,j} X_{i,j} = b_k & \prn{k = 1, \ldots, m}, \\
-  X \succeq O.
-}
-
 
 
 % ======== END OF CONTENTS ========
