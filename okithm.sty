@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2018/03/08 v0.14]
+\ProvidesPackage{okithm}[2018/11/06 v0.2]
 
 
 % ======== Options ========
@@ -77,6 +77,61 @@
   \algdef{SE}[FOR]{ForTo}{EndFor}[2]{\algorithmicfor\ #1 \algorithmicto\ #2 \algorithmicdo}{\algorithmicend\ \algorithmicfor}\algtext*{EndFor}
 \fi
 
+% ======== Optimization Problem ========
+\RequirePackage{array}
+\RequirePackage{xkeyval}
+
+\define@cmdkeys{Minimizekey}[optprob@]{name, variable}
+\define@choicekey*{Minimizekey}{style}[\val]{short,long}{\def\optprob@style{\val}}
+
+\def\okithm@makeoptprob#1#2#3#4#5{%
+  % #1 : options
+  % #2 : minimize
+  % #3 : object function
+  % #4 : subject to
+  % #5 : constraints
+  \setkeys{Minimizekey}{#1}%
+  \begin{align}%
+    \ifdefined\optprob@name%
+      \text{\optprob@name}\quad%
+  	\fi%
+    \begin{array}{|cl}%
+      \ifdefined\optprob@variable%
+        $\underset{\optprob@variable}{\mathrm{#2}}$%
+      \else%
+        \text{#2}%
+      \fi%
+      &\hspace{-1em}$\begin{array}[t]{l}\displaystyle#3\end{array}$ \\
+      \text{#4}%
+      &\hspace{-1em}$\begin{array}[t]{>{\displaystyle}l<{}>{\displaystyle}l<{}}#5\end{array}$%
+    \end{array}%
+  \end{align}
+  \let\optprob@name\undefined%
+  \let\optprob@variable\undefined%
+  \let\optprob@style\undefined%
+}
+
+\def\okithm@DeclareOptProb#1#2#3#4#5{%
+  % #1 : name of the command
+  % #2 : minimize
+  % #3 : min
+  % #4 : subject to
+  % #5 : s.t.
+  \newcommand#1[3][]{%
+    \setkeys{Minimizekey}{##1}%
+    \ifdefined\optprob@style\else
+      \def\optprob@style{\okithm@optstyle}
+    \fi
+    \ifthenelse{\equal{\optprob@style}{long}}{%
+      \okithm@makeoptprob{##1}{#2}{##2}{#4}{##3}%
+    }{%
+      \okithm@makeoptprob{##1}{#3}{##2}{#5}{##3}%
+    }%
+  }%
+}
+
+\okithm@DeclareOptProb{\Minimize}{minimize}{min}{subject to}{s.t.}
+\okithm@DeclareOptProb{\Maximize}{maximize}{max}{subject to}{s.t.}
 
 % ======== Enumeration ========
 \RequirePackage{enumitem}
