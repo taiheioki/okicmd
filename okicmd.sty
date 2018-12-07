@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2018/03/08 v0.18]
+\ProvidesPackage{okicmd}[2018/11/06 v0.2]
 
 \RequirePackage{amsmath}
 \RequirePackage{dsfont}
@@ -108,9 +108,13 @@
 % ======== Functions ========
 \newcommand\doms[2]{{#1}\to{#2}}
 \newcommand\funcdoms[3]{#1\colon\:\doms{#2}{#3}}
+\DeclareMathOperator*\supp{supp}
 
 \NewDocumentCommand\app{omm}{#2\IfValueTF{#1}{\prn[#1]{#3}}{\prn{#3}}}
 \NewDocumentCommand\sqapp{omm}{#2\IfValueTF{#1}{\sqbrkt[#1]{#3}}{\sqbrkt{#3}}}
+
+\declareparen\restrprn{.}{|}
+\newcommand\restr[2]{\restrprn{#1}_{#2}}
 
 \newcommand\Order[1]{\app{\mathrm{O}}{#1}}
 \newcommand\order[1]{\app{\mathrm{o}}{#1}}
@@ -131,6 +135,7 @@
 \renewcommand\vec[1]{\app{\mathrm{vec}}{#1}}
 \newcommand\Row[1]{\app{\mathrm{Row}}{#1}}
 \newcommand\Col[1]{\app{\mathrm{Col}}{#1}}
+\newcommand\zerovec{0}
 \newcommand\onevec{\mathds{1}}
 
 \newcommand\trsp[1]{#1^{\top}}
