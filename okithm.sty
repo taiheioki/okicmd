@@ -1,14 +1,15 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2018/11/06 v0.2]
+\ProvidesPackage{okithm}[2019/01/27 v0.3]
 
 
 % ======== Options ========
 \RequirePackage{kvoptions}
 
-\DeclareBoolOption[true]{thm}
-\DeclareComplementaryOption{nothm}{thm}
-\DeclareBoolOption[true]{alg}
-\DeclareComplementaryOption{noalg}{alg}
+\DeclareBoolOption[true]{theorems}
+\DeclareComplementaryOption{notheorem}{theorems}
+\DeclareStringOption[English]{language}
+\DeclareBoolOption[true]{algorithms}
+\DeclareComplementaryOption{noalgorithm}{algorithms}
 \DeclareStringOption[section]{numberwithin}
 \DeclareStringOption[long]{optstyle}
 \ProcessKeyvalOptions*{}
@@ -16,64 +17,97 @@
 
 % ======== Theorems ========
 
-\ifokithm@thm
+\ifokithm@theorems
   \RequirePackage{amsthm}
   \RequirePackage{thmtools}
+  \RequirePackage{translations}
+  \RequirePackage{xstring}
   
-  \declaretheoremstyle[
-    bodyfont=\normalfont\itshape,
-    postheadspace=5pt,
-    spaceabove=0.3\baselineskip,
-    spacebelow=0.3\baselineskip,
-  ]{thmstyle}
+  \DeclareTranslation{English}{theorem}{Theorem}
+  \DeclareTranslation{English}{definition}{Definition}
+  \DeclareTranslation{English}{lemma}{Lemma}
+  \DeclareTranslation{English}{proposition}{Proposition}
+  \DeclareTranslation{English}{corollary}{Corollary}
+  \DeclareTranslation{English}{example}{Example}
+  \DeclareTranslation{English}{remark}{Remark}
+  \DeclareTranslation{English}{proof}{Proof}
+  
+  \DeclareTranslation{Japanese}{theorem}{定理}
+  \DeclareTranslation{Japanese}{definition}{定義}
+  \DeclareTranslation{Japanese}{lemma}{補題}
+  \DeclareTranslation{Japanese}{proposition}{命題}
+  \DeclareTranslation{Japanese}{corollary}{系}
+  \DeclareTranslation{Japanese}{example}{例}
+  \DeclareTranslation{Japanese}{proof}{証明}
+  
+  \declaretheoremstyle{defstyle}
+  \declaretheoremstyle[qed=\qedsymbol]{exstyle}
+  
+  \IfStrEq{\okithm@language}{Japanese}{%
+    \declaretheoremstyle{thmstyle}
+    \declaretheoremstyle[qed=\qedsymbol]{proofstyle}
+  }{%
+    \declaretheoremstyle[bodyfont=\normalfont\itshape]{thmstyle}
+    \declaretheoremstyle[headfont=\normalfont\itshape,qed=\qedsymbol]{proofstyle}
+  }
 
-  \declaretheoremstyle[
-    postheadspace=5pt,
-    spaceabove=0.3\baselineskip,
-    spacebelow=0.3\baselineskip,
-  ]{defstyle}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{theorem},%
+    style=thmstyle,%
+    numberwithin=\okithm@numberwithin%
+  ]{theorem}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{definition},%
+    style=defstyle,%
+    sibling=theorem%
+  ]{definition}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{lemma},%
+    style=thmstyle,%
+    sibling=theorem%
+  ]{lemma}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{proposition},%
+    style=thmstyle,%
+    sibling=theorem%
+  ]{proposition}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{corollary},%
+    style=thmstyle,%
+    sibling=theorem%
+  ]{corollary}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{example},%
+    style=exstyle,%
+    sibling=theorem%
+  ]{example}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{remark},%
+    style=defstyle,%
+    sibling=theorem%
+  ]{remark}
 
-  \declaretheoremstyle[
-    postheadspace=5pt,
-    spaceabove=0.3\baselineskip,
-    spacebelow=0.3\baselineskip,
-    qed=\qedsymbol,
-  ]{exstyle}
-
-  \declaretheoremstyle[
-    headfont=\normalfont\itshape,
-    postheadspace=5pt,
-    spaceabove=0.3\baselineskip,
-    spacebelow=0.3\baselineskip,
-    qed=\qedsymbol,
-  ]{proofstyle}
-
-  \declaretheorem[name=Theorem,     style=thmstyle, numberwithin=\okithm@numberwithin]{theorem}
-  \declaretheorem[name=Definition,  style=defstyle, sibling=theorem]{definition}
-  \declaretheorem[name=Lemma,       style=thmstyle, sibling=theorem]{lemma}
-  \declaretheorem[name=Proposition, style=thmstyle, sibling=theorem]{proposition}
-  \declaretheorem[name=Corollary,   style=thmstyle, sibling=theorem]{corollary}
-  \declaretheorem[name=Example,     style=exstyle,  sibling=theorem]{example}
-  \declaretheorem[name=Remark,      style=defstyle, sibling=theorem]{remark}
-
-  % proof
   \let\proof\@undefined
   \let\endproof\@undefined
-  \declaretheorem[name=Proof, style=proofstyle, numbered=no]{proof}
+  \declaretheorem[%
+    name=\GetTranslationFor{\okithm@language}{proof},%
+    style=proofstyle,%
+    numbered=no%
+  ]{proof}
 \fi
 
 
 % ======== Algorithm ========
-\ifokithm@alg
+\ifokithm@algorithms
   \RequirePackage{algorithm}
   \RequirePackage[noend]{algpseudocode}
 
-  \algnewcommand\algorithmicinput{\makebox[\widthof{\textbf{Output}}][l]{\textbf{Input}}\textbf{:}}
-  \algnewcommand\Input{\item[\algorithmicinput]}
-  \algnewcommand\algorithmicoutput{\textbf{Output:}}
-  \algnewcommand\Output{\item[\algorithmicoutput]}
+  \algnewcommand{\algorithmicinput}{\makebox[\widthof{\textbf{Output}}][l]{\textbf{Input}}\textbf{:}}
+  \algnewcommand{\Input}{\item[\algorithmicinput]}
+  \algnewcommand{\algorithmicoutput}{\textbf{Output:}}
+  \algnewcommand{\Output}{\item[\algorithmicoutput]}
 
-  \algnewcommand\algorithmicto{\textbf{to}}
+  \algnewcommand{\algorithmicto}{\textbf{to}}
   \algdef{SE}[FOR]{ForTo}{EndFor}[2]{\algorithmicfor\ #1 \algorithmicto\ #2 \algorithmicdo}{\algorithmicend\ \algorithmicfor}\algtext*{EndFor}
 \fi
 
@@ -136,5 +170,8 @@
 % ======== Enumeration ========
 \RequirePackage{enumitem}
 
-\setlist{leftmargin=*}
+\setlist{font=\upshape,leftmargin=*}
 \setlist[1]{labelindent=\parindent}
+\setlist[enumerate,1]{label={(\arabic*)}}
+\setlist[enumerate,2]{label={(\arabic{enumi}-\arabic*)}}
+\setlist[enumerate,3]{label={(\arabic{enumi}-\arabic{enumii}-\arabic*)}}
