@@ -1,2 +1,2 @@
-# latex-template
-My template for LaTeX documents
+# okicmd
+`okicmd` provides numerous macros and environments for LaTeX. See `okicmd.pdf` for document.
