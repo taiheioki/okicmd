@@ -1,10 +1,8 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2019/01/27 v0.3]
-
+\ProvidesPackage{okithm}[2020/01/30 v0.4]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
-
 \DeclareBoolOption[true]{theorems}
 \DeclareComplementaryOption{notheorem}{theorems}
 \DeclareStringOption[English]{language}
@@ -14,15 +12,13 @@
 \DeclareStringOption[long]{optstyle}
 \ProcessKeyvalOptions*{}
 
-
 % ======== Theorems ========
-
 \ifokithm@theorems
   \RequirePackage{amsthm}
   \RequirePackage{thmtools}
   \RequirePackage{translations}
   \RequirePackage{xstring}
-  
+
   \DeclareTranslation{English}{theorem}{Theorem}
   \DeclareTranslation{English}{definition}{Definition}
   \DeclareTranslation{English}{lemma}{Lemma}
@@ -31,7 +27,7 @@
   \DeclareTranslation{English}{example}{Example}
   \DeclareTranslation{English}{remark}{Remark}
   \DeclareTranslation{English}{proof}{Proof}
-  
+
   \DeclareTranslation{Japanese}{theorem}{定理}
   \DeclareTranslation{Japanese}{definition}{定義}
   \DeclareTranslation{Japanese}{lemma}{補題}
@@ -39,10 +35,10 @@
   \DeclareTranslation{Japanese}{corollary}{系}
   \DeclareTranslation{Japanese}{example}{例}
   \DeclareTranslation{Japanese}{proof}{証明}
-  
+
   \declaretheoremstyle{defstyle}
   \declaretheoremstyle[qed=\qedsymbol]{exstyle}
-  
+
   \IfStrEq{\okithm@language}{Japanese}{%
     \declaretheoremstyle{thmstyle}
     \declaretheoremstyle[qed=\qedsymbol]{proofstyle}
@@ -97,8 +93,9 @@
 \fi
 
 
-% ======== Algorithm ========
+% ======== Algorithms ========
 \ifokithm@algorithms
+  \let\Return\relax
   \RequirePackage{algorithm}
   \RequirePackage[noend]{algpseudocode}
 
@@ -111,7 +108,7 @@
   \algdef{SE}[FOR]{ForTo}{EndFor}[2]{\algorithmicfor\ #1 \algorithmicto\ #2 \algorithmicdo}{\algorithmicend\ \algorithmicfor}\algtext*{EndFor}
 \fi
 
-% ======== Optimization Problem ========
+% ======== Optimization Problems ========
 \RequirePackage{array}
 \RequirePackage{xkeyval}
 

@@ -1,78 +1,92 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2019/01/27 v0.3]
+\ProvidesPackage{okicmd}[2020/01/30 v0.4]
 
 \RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{bm}
 \RequirePackage{dsfont}
+\RequirePackage{mathtools}
 \RequirePackage{stmaryrd}
 \RequirePackage{xparse}
 
 % ======== Greece alphabets ======
-\renewcommand{\epsilon}{\varepsilon}
-\renewcommand{\phi}{\varphi}
+\newcommand\okicmd@exchange[2]{\let\okicmd@tmp#1\let#1#2\let#2\okicmd@tmp}
+\okicmd@exchange{\epsilon}{\varepsilon}
+\okicmd@exchange{\phi}{\varphi}
+
+\let\okicmd@ell\ell
+\mathcode`l="8000
+\lccode`\~=`\l
+\DeclareMathSymbol{\okicmd@l}{\mathalpha}{letters}{`l}
+\lowercase{\gdef~{\ifnum\the\mathgroup=\m@ne \okicmd@ell \else \okicmd@l \fi}}
+\let\ell\okicmd@l
 
 % ======== Parenthesis ========
 \newcommand{\okicmd@kern}{\kern-\nulldelimiterspace}
-\newcommand{\autoleft}[2]{%
+\newcommand{\okicmd@autoleft}[2]{%
   \mathopen{\left#1\vphantom{#2}\okicmd@kern\right.}%
 }
-\newcommand{\automiddle}[2]{%
+\newcommand{\okicmd@automiddle}[2]{%
   \mathrel{\left.\okicmd@kern\vphantom{#2}\middle#1\okicmd@kern\right.}%
 }
-\newcommand{\autoright}[2]{%
+\newcommand{\okicmd@autoright}[2]{%
   \mathclose{\left.\okicmd@kern\vphantom{#2}\right#1}%
 }
 
 % #1: macro name
 % #2: left parenthesis
 % #3: right parenthesis
-\newcommand{\declareparen}[3]{%
+\newcommand{\DecrareParenthesis}[3]{%
   \NewDocumentCommand{#1}{om}{%
-    \IfValueTF{##1}{\mathopen##1#2}{\autoleft{#2}{##2}}%
+    \IfValueTF{##1}{\mathopen##1#2}{\okicmd@autoleft{#2}{##2}}%
     ##2%
-    \IfValueTF{##1}{\mathclose##1#3}{\autoright{#3}{##2}}%
+    \IfValueTF{##1}{\mathclose##1#3}{\okicmd@autoright{#3}{##2}}%
   }%
 }
 
-\declareparen{\prn}{(}{)}
-\declareparen{\curl}{\{}{\}}
-\declareparen{\sqbr}{[}{]}
-\declareparen{\agbr}{\langle}{\rangle}
-\declareparen{\dbbr}{\llbracket}{\rrbracket}
-\declareparen{\abs}{|}{|}
-\declareparen{\norm}{\|}{\|}
-\declareparen{\floor}{\lfloor}{\rfloor}
-\declareparen{\ceil}{\lceil}{\rceil}
+\DecrareParenthesis{\prn}{(}{)}
+\DecrareParenthesis{\curl}{\{}{\}}
+\DecrareParenthesis{\sqbr}{[}{]}
+\DecrareParenthesis{\agbr}{\langle}{\rangle}
+\DecrareParenthesis{\dbbr}{\llbracket}{\rrbracket}
+\DecrareParenthesis{\abs}{|}{|}
+\DecrareParenthesis{\norm}{\|}{\|}
+\DecrareParenthesis{\floor}{\lfloor}{\rfloor}
+\DecrareParenthesis{\ceil}{\lceil}{\rceil}
 
 % #1: adjust size if not starred
 % #2: macro name
 % #3: left parenthesis
 % #4: middle parenthesis
 % #5: right parenthesis
-\NewDocumentCommand{\declareparenwithmiddle}{smmmm}{%
+\NewDocumentCommand{\DecrareParenthesisWithMiddle}{smmmm}{%
   \NewDocumentCommand{#2}{omo}{%
     \IfValueTF{##3}{%
-      \IfValueTF{##1}{\mathopen##1#3}{\autoleft{#3}{{##2}{##3}}}%
+      \IfValueTF{##1}{\mathopen##1#3}{\okicmd@autoleft{#3}{{##2}{##3}}}%
       ##2%
       \IfBooleanTF{#1}{\mathrel#4}{%
-        \IfValueTF{##1}{\mathrel##1#4}{\automiddle{#4}{{##2}{##3}}}%
+        \IfValueTF{##1}{\mathrel##1#4}{\okicmd@automiddle{#4}{{##2}{##3}}}%
       }%
       ##3%
-      \IfValueTF{##1}{\mathclose##1#5}{\autoright{#5}{{##2}{##3}}}%
+      \IfValueTF{##1}{\mathclose##1#5}{\okicmd@autoright{#5}{{##2}{##3}}}%
     }{%
-      \IfValueTF{##1}{\mathopen##1#3}{\autoleft{#3}{##2}}%
+      \IfValueTF{##1}{\mathopen##1#3}{\okicmd@autoleft{#3}{##2}}%
       ##2%
-      \IfValueTF{##1}{\mathclose##1#5}{\autoright{#5}{##2}}%
+      \IfValueTF{##1}{\mathclose##1#5}{\okicmd@autoright{#5}{##2}}%
     }%
   }%
 }
 
-\declareparenwithmiddle{\seq}{(}{|}{)}
-\declareparenwithmiddle{\set}{\{}{|}{\}}
-\declareparenwithmiddle*{\condit}{.}{:}{.}
+% ======== Logic ========
+\newcommand{\bigland}{\bigwedge}
+\newcommand{\biglor}{\bigvee}
+\newcommand{\defeq}{\coloneqq}
+\newcommand{\eqdef}{\eqqcolon}
+\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
 
 % ======== Sets ========
-\let\card=\abs
-\newcommand{\powerset}[1]{2^{#1}}
+\DecrareParenthesisWithMiddle{\set}{\{}{|}{\}}
+\newcommand{\intset}[1]{\sqbr{#1}}
 
 \newcommand{\setN}{\mathbb{N}}
 \newcommand{\setZ}{\mathbb{Z}}
@@ -84,53 +98,52 @@
 \newcommand{\setF}{\mathbb{F}}
 \newcommand{\setK}{\mathbb{K}}
 
-\newcommand{\setRp}{\setR_{\geq 0}}
-\newcommand{\setQp}{\setQ_{\geq 0}}
 \newcommand{\setZp}{\setZ_{\geq 0}}
+\newcommand{\setQp}{\setQ_{\geq 0}}
+\newcommand{\setRp}{\setR_{\geq 0}}
 
-\newcommand{\intset}[1]{\sqbr{#1}}
+% ======== Maps ========
+\newcommand{\doms}[2]{{#1}\to{#2}}
+\newcommand{\funcdoms}[3]{#1\colon\doms{#2}{#3}}
+\DecrareParenthesis{\restrprn}{.}{|}
+\newcommand{\restr}[2]{\restrprn{#1}_{#2}}
+\DeclareMathOperator{\id}{id}
+\DeclareMathOperator{\dom}{dom}
+\DeclareMathOperator{\cod}{cod}
+\DeclareMathOperator{\supp}{supp}
 
-% ======== Binary relations ========
-\newcommand{\defeq}{\coloneqq}
-\newcommand{\eqdef}{\eqqcolon}
-
-% ======== Orders ========
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\argmax}{arg\,max}
+% ======== Lattices ========
 \newcommand{\meet}{\mathbin{\wedge}}
 \newcommand{\join}{\mathbin{\vee}}
-
-% ======== Logic ========
-\newcommand{\bigland}{\bigwedge}
-\newcommand{\biglor}{\bigvee}
-\newcommand{\defiff}{\overset{\mathrm{def}}{\iff}}
-
-% ======== Functions ========
-\newcommand{\doms}[2]{{#1}\to{#2}}
-\newcommand{\funcdoms}[3]{#1\colon\:\doms{#2}{#3}}
-\DeclareMathOperator{\supp}{supp}
-\declareparen{\restrprn}{.}{|}
-\newcommand{\restr}[2]{\restrprn{#1}_{#2}}
-
-\DeclareMathOperator{\sgn}{sgn}
-
-\DeclareMathOperator{\Order}{O}
-\DeclareMathOperator{\order}{o}
+\newcommand{\bigmeet}{\bigwedge}
+\newcommand{\bigjoin}{\bigvee}
 
 % ======== Algebra ========
 \DeclareMathOperator{\Hom}{Hom}
-\DeclareMathOperator{\Aut}{Aut}
 \DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
 
-\newcommand{\sym}[1]{\mathfrak{S}_{#1}}
+\DecrareParenthesisWithMiddle{\gen}{\langle}{|}{\rangle}
+\newcommand{\abel}[1]{#1_{\mathrm{ab}}}
+\newcommand{\comm}[1]{\sqbr{#1, #1}}
+\newcommand{\sym}{\mathfrak{S}}
+\DeclareMathOperator{\sgn}{sgn}
 
+\newcommand{\mult}[1]{#1^{\times}}
+\DeclareMathOperator{\M}{M}
 \DeclareMathOperator{\GL}{GL}
 \DeclareMathOperator{\SL}{SL}
 \let\O\relax
 \DeclareMathOperator{\O}{O}
 \DeclareMathOperator{\SO}{SO}
+\let\U\relax
 \DeclareMathOperator{\U}{U}
 \DeclareMathOperator{\SU}{SU}
+
+% ======== Number Theory ========
+\newcommand{\coprime}{\mathrel{\bot}}
+\newcommand{\divides}{\mid}
+\newcommand{\ndivides}{\nmid}
 
 % ======== Linear Algebra ========
 \DeclareMathOperator{\tr}{tr}
@@ -143,7 +156,6 @@
 \DeclareMathOperator{\vec}{vec}
 \DeclareMathOperator{\Row}{Row}
 \DeclareMathOperator{\Col}{Col}
-\newcommand{\zerovec}{0}
 \newcommand{\onevec}{\mathds{1}}
 
 \newcommand{\trsp}[1]{#1^{\top}}
@@ -151,13 +163,15 @@
 
 \newcommand{\inpr}[2]{\agbr{#1, #2}}
 
-% ======== Analytics ========
+% ======== Analysis ========
 \newcommand{\e}{\mathrm{e}}
 \renewcommand{\d}{\mathrm{d}}
-\newcommand{\dif}[2]{\dfrac{\d{#1}}{\d{#2}}}
-\newcommand{\pdif}[2]{\dfrac{\partial{#1}}{\partial{#2}}}
+\newcommand{\dif}[2]{\frac{\d{#1}}{\d{#2}}}
+\newcommand{\ddif}[2]{\dfrac{\d{#1}}{\d{#2}}}
+\newcommand{\pdif}[2]{\frac{\partial{#1}}{\partial{#2}}}
+\newcommand{\dpdif}[2]{\dfrac{\partial{#1}}{\partial{#2}}}
 
-% ======== Complex Numbers ========
+% ======== Complex Analysis ========
 \renewcommand{\i}{\mathrm{i}}
 \let\Re\relax
 \DeclareMathOperator{\Re}{Re}
@@ -170,8 +184,9 @@
 \DeclareMathOperator{\Tan}{Tan}
 \DeclareMathOperator*{\Res}{Res}
 
-% ======== Number Theory ========
-\newcommand{\coprime}{\mathrel{\bot}}
-\newcommand{\divides}{\mid}
-\newcommand{\ndivides}{\nmid}
-
+% ======== Optimization ========
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator{\Order}{O}
+\DeclareMathOperator{\order}{o}
+\DecrareParenthesisWithMiddle*{\condit}{.}{:}{.}
