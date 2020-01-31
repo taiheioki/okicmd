@@ -21,7 +21,7 @@
 \lowercase{\gdef~{\ifnum\the\mathgroup=\m@ne \okicmd@ell \else \okicmd@l \fi}}
 \let\ell\okicmd@l
 
-% ======== Parenthesis ========
+% ======== Parentheses ========
 \newcommand{\okicmd@kern}{\kern-\nulldelimiterspace}
 \newcommand{\okicmd@autoleft}[2]{%
   \mathopen{\left#1\vphantom{#2}\okicmd@kern\right.}%
@@ -87,6 +87,7 @@
 % ======== Sets ========
 \DecrareParenthesisWithMiddle{\set}{\{}{|}{\}}
 \newcommand{\intset}[1]{\sqbr{#1}}
+\let\card\abs
 
 \newcommand{\setN}{\mathbb{N}}
 \newcommand{\setZ}{\mathbb{Z}}

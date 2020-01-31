@@ -52,7 +52,7 @@
   \end{tabular}
 \end{center}
 
-\subsection{Parenthesis}
+\subsection{Parentheses}
 \begin{center}
   \begin{tabular}{lc} \toprule
     \multicolumn{1}{c}{Input} & Output               \\\midrule
@@ -93,6 +93,7 @@
     \verb|\set{a \in S}|   & $\set{a \in S}$          \\
     \verb|\set{a \in S}[a^2 = 1]|   & $\set{a \in S}[a^2 = 1]$ \\
     \verb|\intset{n}|   & $\intset{n}$             \\
+    \verb|\card{X}|   & $\card{X}$               \\
     \verb|\setN|   & $\setN$                  \\
     \verb|\setZ|   & $\setZ$                  \\
     \verb|\setQ|   & $\setQ$                  \\
@@ -228,7 +229,7 @@
     \multicolumn{1}{c}{Input} & Output                   \\\midrule
     \verb|\argmin_{x \in S} f(x)|   & $\argmin_{x \in S} f(x)$ \\
     \verb|\argmax_{x \in S} f(x)|   & $\argmax_{x \in S} f(x)$ \\
-    \verb|\Order(n) |   & $\Order(n)$              \\
+    \verb|\Order(n) |  & $\Order(n)$              \\
     \verb|\order(n) |  & $\order(n)$              \\
     \bottomrule
   \end{tabular}
@@ -241,7 +242,7 @@ If the option \texttt{language = Japanese} is given, \texttt{okithm} will transl
 You can disable theorems by setting the option \texttt{notheorem}.
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{theorem}[Awesome theorem]
   The square root $\sqrt{2}$ of two is irrational.
 \end{theorem}
@@ -255,7 +256,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{definition}[Coprime]
   Integers $a$ and $b$ are said to be \emph{coprime} if their greatest
   common divisor is one.
@@ -271,7 +272,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{lemma}
   If $a$ and $b$ are coprime, so are $a^2$ and $b^2$.
 \end{lemma}
@@ -285,7 +286,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{proposition}
   If $\sqrt{2} = a/b$, then $a^2 = 2b^2$.
 \end{proposition}
@@ -299,7 +300,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{corollary}
   If $\sqrt{2} = a/b$ with $a$ and $b$ being coprime, then $a$ is even.
 \end{corollary}
@@ -313,7 +314,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{example}
   If $a = 2$ and $b = 1$, then $a$ is even but $\sqrt{2} \ne a/b$.
 \end{example}
@@ -327,7 +328,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{remark}
   Note that $a$ and $b$ must be integers.
 \end{remark}
@@ -341,7 +342,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 \end{itembox}
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{proof}
   Suppose to the contrary that $\sqrt{2} = a/b$ with coprime $a$ and $b$.
   Then both $a$ and $b$ are even, which contradicts the assumption.
@@ -361,7 +362,7 @@ You can disable theorems by setting the option \texttt{notheorem}.
 You can disable algorithms by setting the option \texttt{noalgorithm}.
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \begin{algorithm}[htbp]
   \begin{algorithmic}[1]
     \Input{$n \in \setN$}
@@ -382,7 +383,7 @@ You can disable algorithms by setting the option \texttt{noalgorithm}.
     \Output{$n(n+1)/2$}
     \State{$s \gets 0$}
     \ForTo{$i = 1$}{$n$}
-      \State{$s \gets s + i$}
+    \State{$s \gets s + i$}
     \EndFor{}
     \State{\Return{} $s$}
   \end{algorithmic}
@@ -393,7 +394,7 @@ You can disable algorithms by setting the option \texttt{noalgorithm}.
 You can change \texttt{minimize}, \texttt{maximize} and \texttt{subject to} into \texttt{min}, \texttt{max} and \texttt{s.t.}, respectively, by setting the option \texttt{optstyle=short}.
 
 \begin{itembox}[l]{Input}
-\begin{verbatim}
+  \begin{verbatim}
 \Minimize[name={(P)}]{
   \sum_{\condit{x \in S}[x^2 = 1]} w(x) + \sum_{i=1}^n (p_i + q_i)
 }{
