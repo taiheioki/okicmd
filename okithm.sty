@@ -1,11 +1,10 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2020/01/30 v0.4]
+\ProvidesPackage{okithm}[2020/02/02 v0.5]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
 \DeclareBoolOption[true]{theorems}
 \DeclareComplementaryOption{notheorem}{theorems}
-\DeclareStringOption[English]{language}
 \DeclareBoolOption[true]{algorithms}
 \DeclareComplementaryOption{noalgorithm}{algorithms}
 \DeclareStringOption[section]{numberwithin}
@@ -17,81 +16,79 @@
   \RequirePackage{amsthm}
   \RequirePackage{thmtools}
   \RequirePackage{translations}
-  \RequirePackage{xstring}
 
-  \DeclareTranslation{English}{theorem}{Theorem}
-  \DeclareTranslation{English}{definition}{Definition}
-  \DeclareTranslation{English}{lemma}{Lemma}
-  \DeclareTranslation{English}{proposition}{Proposition}
-  \DeclareTranslation{English}{corollary}{Corollary}
-  \DeclareTranslation{English}{example}{Example}
-  \DeclareTranslation{English}{remark}{Remark}
-  \DeclareTranslation{English}{proof}{Proof}
+  \ProvideTranslation{English}{theorem}{Theorem}
+  \ProvideTranslation{English}{definition}{Definition}
+  \ProvideTranslation{English}{lemma}{Lemma}
+  \ProvideTranslation{English}{proposition}{Proposition}
+  \ProvideTranslation{English}{corollary}{Corollary}
+  \ProvideTranslation{English}{example}{Example}
+  \ProvideTranslation{English}{remark}{Remark}
+  \ProvideTranslation{English}{proof}{Proof}
 
-  \DeclareTranslation{Japanese}{theorem}{定理}
-  \DeclareTranslation{Japanese}{definition}{定義}
-  \DeclareTranslation{Japanese}{lemma}{補題}
-  \DeclareTranslation{Japanese}{proposition}{命題}
-  \DeclareTranslation{Japanese}{corollary}{系}
-  \DeclareTranslation{Japanese}{example}{例}
-  \DeclareTranslation{Japanese}{proof}{証明}
+  \ProvideTranslation{Japanese}{theorem}{定理}
+  \ProvideTranslation{Japanese}{definition}{定義}
+  \ProvideTranslation{Japanese}{lemma}{補題}
+  \ProvideTranslation{Japanese}{proposition}{命題}
+  \ProvideTranslation{Japanese}{corollary}{系}
+  \ProvideTranslation{Japanese}{example}{例}
+  \ProvideTranslation{Japanese}{proof}{証明}
 
-  \declaretheoremstyle{defstyle}
-  \declaretheoremstyle[qed=\qedsymbol]{exstyle}
+  \declaretheoremstyle{okithm@defstyle}
+  \declaretheoremstyle[qed=\qedsymbol]{okicmd@exstyle}
 
-  \IfStrEq{\okithm@language}{Japanese}{%
-    \declaretheoremstyle{thmstyle}
-    \declaretheoremstyle[qed=\qedsymbol]{proofstyle}
+  \ifcurrentlanguage{Japanese}{%
+    \declaretheoremstyle{okicmd@thmstyle}
+    \declaretheoremstyle[qed=\qedsymbol]{okicmd@proofstyle}
   }{%
-    \declaretheoremstyle[bodyfont=\normalfont\itshape]{thmstyle}
-    \declaretheoremstyle[headfont=\normalfont\itshape,qed=\qedsymbol]{proofstyle}
+    \declaretheoremstyle[bodyfont=\normalfont\itshape]{okicmd@thmstyle}
+    \declaretheoremstyle[headfont=\normalfont\itshape,qed=\qedsymbol]{okicmd@proofstyle}
   }
 
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{theorem},%
-    style=thmstyle,%
+    name=\protect\GetTranslation{theorem},%
+    style=okicmd@thmstyle,%
     numberwithin=\okithm@numberwithin%
   ]{theorem}
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{definition},%
-    style=defstyle,%
+    name=\protect\GetTranslation{definition},%
+    style=okithm@defstyle,%
     sibling=theorem%
   ]{definition}
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{lemma},%
-    style=thmstyle,%
+    name=\protect\GetTranslation{lemma},%
+    style=okicmd@thmstyle,%
     sibling=theorem%
   ]{lemma}
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{proposition},%
-    style=thmstyle,%
+    name=\protect\GetTranslation{proposition},%
+    style=okicmd@thmstyle,%
     sibling=theorem%
   ]{proposition}
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{corollary},%
-    style=thmstyle,%
+    name=\protect\GetTranslation{corollary},%
+    style=okicmd@thmstyle,%
     sibling=theorem%
   ]{corollary}
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{example},%
-    style=exstyle,%
+    name=\protect\GetTranslation{example},%
+    style=okicmd@exstyle,%
     sibling=theorem%
   ]{example}
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{remark},%
-    style=defstyle,%
+    name=\protect\GetTranslation{remark},%
+    style=okithm@defstyle,%
     sibling=theorem%
   ]{remark}
 
   \let\proof\@undefined
   \let\endproof\@undefined
   \declaretheorem[%
-    name=\GetTranslationFor{\okithm@language}{proof},%
-    style=proofstyle,%
+    name=\protect\GetTranslation{proof},%
+    style=okicmd@proofstyle,%
     numbered=no%
   ]{proof}
 \fi
-
 
 % ======== Algorithms ========
 \ifokithm@algorithms

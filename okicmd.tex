@@ -1,7 +1,7 @@
 % !TEX encoding = UTF-8 Unicode
 % !TEX root = okicmd.tex
 \RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[a4paper, 11pt]{article}
+\documentclass[11pt, a4paper]{article}
 
 % Margin & fonts (delete them to use a provided class style)
 \usepackage[top=1truein, bottom=1truein, left=1truein, right=1truein]{geometry}
@@ -11,43 +11,42 @@
 \usepackage{lmodern}
 
 % hyperref
-\usepackage[bookmarksnumbered=true, hypertexnames=false, pdfdisplaydoctitle=true, pdfusetitle, setpagesize=false, unicode]{hyperref}
-\usepackage{url}
-
-% Clever references
-\usepackage{amsmath}
-\usepackage[capitalize, noabbrev]{cleveref}
-\newcommand{\crefrangeconjunction}{--}
-\usepackage{autonum}
+\usepackage[bookmarksnumbered, pdfdisplaydoctitle, pdfusetitle, unicode]{hyperref}
 
 % Misc
-\usepackage{ascmac}
+\usepackage{autonum}
 \usepackage{booktabs}
-\usepackage{comment}
 \usepackage[en-US]{datetime2}
+
+% Code execution and highlight
+\usepackage{cnltx-example}
+\newsourcecodeenv{cnltxexample}
+\let\example\relax
+\let\endexample\relax
 
 % okicmd
 \usepackage{okicmd}
 \usepackage{okithm}
 
-\title{The \texttt{okicmd} and \texttt{okithm} Packages}
+
+\title{The \pkg*{okicmd} and \pkg*{okithm} Packages}
 \author{Taihei Oki}
 
 \begin{document}
 \maketitle
 
-\section{The \texttt{okicmd} Package}
+\section{The \pkg*{okicmd} Package}
 
 \subsection{Alphabets}
 \begin{center}
   \begin{tabular}{lc} \toprule
     \multicolumn{1}{c}{Input} & Output        \\\midrule
-    \verb|l|    & $l$           \\
-    \verb|\ell|    & $\ell$        \\
-    \verb|\epsilon|    & $\epsilon$    \\
-    \verb|\varepsilon|    & $\varepsilon$ \\
-    \verb|\phi|    & $\phi$        \\
-    \verb|\varphi|    & $\varphi$     \\
+    \code{l}                  & $l$           \\
+    \cs{ell}                  & $\ell$        \\
+    \cs{epsilon}              & $\epsilon$    \\
+    \cs{varepsilon}           & $\varepsilon$ \\
+    \cs{phi}                  & $\phi$        \\
+    \cs{varphi}               & $\varphi$     \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -55,20 +54,20 @@
 \subsection{Parentheses}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output               \\\midrule
-    \verb|\prn{\cdot}|    & $\prn{\cdot}$        \\
-    \verb|\prn[\big]{\cdot}|    & $\prn[\big]{\cdot}$  \\
-    \verb|\prn[\Big]{\cdot}|    & $\prn[\Big]{\cdot}$  \\
-    \verb|\prn[\bigg]{\cdot}|   & $\prn[\bigg]{\cdot}$ \\
-    \verb|\prn[\Bigg]{\cdot}|   & $\prn[\Bigg]{\cdot}$ \\
-    \verb|\curl{\cdot}|   & $\curl{\cdot}$       \\
-    \verb|\sqbr{\cdot}|   & $\sqbr{\cdot}$       \\
-    \verb|\agbr{\cdot}|   & $\agbr{\cdot}$       \\
-    \verb|\dbbr{\cdot}|   & $\dbbr{\cdot}$       \\
-    \verb|\abs{\cdot}|   & $\abs{\cdot}$        \\
-    \verb|\norm{\cdot}|   & $\norm{\cdot}$       \\
-    \verb|\floor{\cdot}|   & $\floor{\cdot}$      \\
-    \verb|\ceil{\cdot}|   & $\ceil{\cdot}$       \\
+    \multicolumn{1}{c}{Input}                & Output               \\\midrule
+    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        \\
+    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  \\
+    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  \\
+    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ \\
+    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ \\
+    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       \\
+    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       \\
+    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       \\
+    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       \\
+    \cs{abs}\Marg{\cs{cdot}}                 & $\abs{\cdot}$        \\
+    \cs{norm}\Marg{\cs{cdot}}                & $\norm{\cdot}$       \\
+    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      \\
+    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -77,11 +76,11 @@
 \begin{center}
   \begin{tabular}{lc} \toprule
     \multicolumn{1}{c}{Input} & Output        \\\midrule
-    \verb|\bigland|   & $\bigland$    \\
-    \verb|\biglor|   & $\biglor$     \\
-    \verb|a \defeq b|   & $a \defeq b$  \\
-    \verb|b \eqdef a|   & $b \eqdef a$  \\
-    \verb|P \defiff Q|   & $P \defiff Q$ \\
+    \cs{bigland}              & $\bigland$    \\
+    \cs{biglor}               & $\biglor$     \\
+    \code{a \cs{defeq} b}     & $a \defeq b$  \\
+    \code{a \cs{eqdef} b}     & $b \eqdef a$  \\
+    \code{P \cs{defiff} Q}    & $P \defiff Q$ \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -89,22 +88,22 @@
 \subsection{Sets}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output                   \\\midrule
-    \verb|\set{a \in S}|   & $\set{a \in S}$          \\
-    \verb|\set{a \in S}[a^2 = 1]|   & $\set{a \in S}[a^2 = 1]$ \\
-    \verb|\intset{n}|   & $\intset{n}$             \\
-    \verb|\card{X}|   & $\card{X}$               \\
-    \verb|\setN|   & $\setN$                  \\
-    \verb|\setZ|   & $\setZ$                  \\
-    \verb|\setQ|   & $\setQ$                  \\
-    \verb|\setR|   & $\setR$                  \\
-    \verb|\setC|   & $\setC$                  \\
-    \verb|\setH|   & $\setH$                  \\
-    \verb|\setF|   & $\setF$                  \\
-    \verb|\setK|   & $\setK$                  \\
-    \verb|\setZp|   & $\setZp$                 \\
-    \verb|\setQp|   & $\setQp$                 \\
-    \verb|\setRp|   & $\setRp$                 \\
+    \multicolumn{1}{c}{Input}                       & Output                   \\\midrule
+    \cs{set}\Marg{a \cs{in} S}                      & $\set{a \in S}$          \\
+    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ \\
+    \cs{intset}\Marg{n}                             & $\intset{n}$             \\
+    \cs{card}\Marg{X}                               & $\card{X}$               \\
+    \cs{setN}                                       & $\setN$                  \\
+    \cs{setZ}                                       & $\setZ$                  \\
+    \cs{setQ}                                       & $\setQ$                  \\
+    \cs{setR}                                       & $\setR$                  \\
+    \cs{setC}                                       & $\setC$                  \\
+    \cs{setH}                                       & $\setH$                  \\
+    \cs{setF}                                       & $\setF$                  \\
+    \cs{setK}                                       & $\setK$                  \\
+    \cs{setZp}                                      & $\setZp$                 \\
+    \cs{setQp}                                      & $\setQp$                 \\
+    \cs{setRp}                                      & $\setRp$                 \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -112,14 +111,14 @@
 \subsection{Maps}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output               \\\midrule
-    \verb|\doms{X}{Y}|   & $\doms{X}{Y}$        \\
-    \verb|\funcdoms{f}{X}{Y}|   & $\funcdoms{f}{X}{Y}$ \\
-    \verb|\restr{f}{S}|   & $\restr{f}{S}$       \\
-    \verb|\id_K|   & $\id_K$              \\
-    \verb|\dom f|   & $\dom f$             \\
-    \verb|\cod f|   & $\cod f$             \\
-    \verb|\supp f|   & $\supp f$            \\
+    \multicolumn{1}{c}{Input}             & Output               \\\midrule
+    \cs{doms}\Marg{X}\Marg{Y}             & $\doms{X}{Y}$        \\
+    \cs{funcdoms}\Marg{f}\Marg{X}\Marg{Y} & $\funcdoms{f}{X}{Y}$ \\
+    \cs{restr}\Marg{f}\Marg{S}            & $\restr{f}{S}$       \\
+    \code{\cs{id}\_K}                     & $\id_K$              \\
+    \code{\cs{dom} f}                     & $\dom f$             \\
+    \code{\cs{cod} f}                     & $\cod f$             \\
+    \code{\cs{supp} f}                    & $\supp f$            \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -128,10 +127,10 @@
 \begin{center}
   \begin{tabular}{lc} \toprule
     \multicolumn{1}{c}{Input} & Output      \\\midrule
-    \verb|x \meet y|   & $x \meet y$ \\
-    \verb|x \join y|   & $x \join y$ \\
-    \verb|\bigmeet|   & $\bigmeet$  \\
-    \verb|\bigjoin|   & $\bigjoin$  \\
+    \code{x \cs{meet} y}      & $x \meet y$ \\
+    \code{x \cs{join} y}      & $x \join y$ \\
+    \cs{bigmeet}              & $\bigmeet$  \\
+    \cs{bigjoin}              & $\bigjoin$  \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -139,24 +138,24 @@
 \subsection{Algebra}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output               \\\midrule
-    \verb|\Hom(G)|   & $\Hom(G)$            \\
-    \verb|\End R|   & $\End R$             \\
-    \verb|\Aut_k K|   & $\Aut_k K$           \\
-    \verb|\gen{a, b}|   & $\gen{a, b}$         \\
-    \verb|\gen{a, b}[ab = e]|   & $\gen{a, b}[ab = e]$ \\
-    \verb|\abel{G}|   & $\abel{G}$           \\
-    \verb|\comm{G}|   & $\comm{G}$           \\
-    \verb|\sym_n|   & $\sym_n$             \\
-    \verb|\sgn(\sigma)|   & $\sgn(\sigma)$       \\
-    \verb|\mult{R}|   & $\mult{R}$           \\
-    \verb|\M_{m,n}(R)|   & $\M_{m,n}(R)$        \\
-    \verb|\GL_n(R)|   & $\GL_n(R)$           \\
-    \verb|\SL_n(R)|   & $\SL_n(R)$           \\
-    \verb|\O(n)|   & $\O(n)$              \\
-    \verb|\SO(n)|   & $\SO(n)$             \\
-    \verb|\U(n)|   & $\U(n)$              \\
-    \verb|\SU(n)|   & $\SU(n)$             \\
+    \multicolumn{1}{c}{Input}                  & Output               \\\midrule
+    \cs{Hom}\Darg{G}                           & $\Hom(G)$            \\
+    \code{\cs{End} R}                          & $\End R$             \\
+    \code{\cs{Aut}\_k K}                       & $\Aut_k K$           \\
+    \cs{gen}\Marg{a, b}                        & $\gen{a, b}$         \\
+    \cs{gen}\Marg{a, b}\Oarg{ab = e}           & $\gen{a, b}[ab = e]$ \\
+    \cs{abel}\Marg{G}                          & $\abel{G}$           \\
+    \cs{comm}\Marg{G}                          & $\comm{G}$           \\
+    \code{\cs{sym}\_n}                         & $\sym_n$             \\
+    \cs{sgn}\Darg{\cs{sigma}}                  & $\sgn(\sigma)$       \\
+    \cs{mult}\Marg{R}                          & $\mult{R}$           \\
+    \code{\cs{M}\_\string{m,n\string}\Darg{R}} & $\M_{m,n}(R)$        \\
+    \code{\cs{GL}\_n\Darg{R}}                  & $\GL_n(R)$           \\
+    \code{\cs{SL}\_n\Darg{R}}                  & $\SL_n(R)$           \\
+    \cs{O}\Darg{n}                             & $\O(n)$              \\
+    \cs{SO}\Darg{n}                            & $\SO(n)$             \\
+    \cs{U}\Darg{n}                             & $\U(n)$              \\
+    \cs{SU}\Darg{n}                            & $\SU(n)$             \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -165,9 +164,9 @@
 \begin{center}
   \begin{tabular}{lc} \toprule
     \multicolumn{1}{c}{Input} & Output          \\\midrule
-    \verb|a \coprime b|   & $a \coprime b$  \\
-    \verb|a \divides b|   & $a \divides b$  \\
-    \verb|a \ndivides b|   & $a \ndivides b$ \\
+    \code{a \cs{coprime} b}   & $a \coprime b$  \\
+    \code{a \cs{divides} b}   & $a \divides b$  \\
+    \code{a \cs{ndivides} b}  & $a \ndivides b$ \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -175,19 +174,19 @@
 \subsection{Linear Algebra}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output                         \\\midrule
-    \verb|\tr A|   & $\tr A$                        \\
-    \verb|\rank A|   & $\rank A$                      \\
-    \verb|\trank A|   & $\trank A$                     \\
-    \verb|\diag(a_1, \ldots, a_n)|   & $\diag(a_1, \ldots, a_n)$      \\
-    \verb|\blockdiag(A_1, \ldots, A_n)|   & $\blockdiag(A_1, \ldots, A_n)$ \\
-    \verb|\vec(A)|   & $\vec(A)$                      \\
-    \verb|\Row(A)|   & $\Row(A)$                      \\
-    \verb|\Col(A)|   & $\Col(A)$                      \\
-    \verb|\onevec|   & $\onevec$                      \\
-    \verb|\trsp{A}|   & $\trsp{A}$                     \\
-    \verb|\adjo{A}|   & $\adjo{A}$                     \\
-    \verb|\inpr{x}{y}|   & $\inpr{x}{y}$                  \\
+    \multicolumn{1}{c}{Input}                   & Output                         \\\midrule
+    \code{\cs{tr} A}                            & $\tr A$                        \\
+    \code{\cs{rank} A}                          & $\rank A$                      \\
+    \code{\cs{trank} A}                         & $\trank A$                     \\
+    \cs{diag}\Darg{a\_1, \cs{ldots}, a\_n}      & $\diag(a_1, \ldots, a_n)$      \\
+    \cs{blockdiag}\Darg{A\_1, \cs{ldots}, A\_n} & $\blockdiag(A_1, \ldots, A_n)$ \\
+    \cs{vec}\Darg{A}                            & $\vec(A)$                      \\
+    \cs{Row}\Darg{A}                            & $\Row(A)$                      \\
+    \cs{Col}\Darg{A}                            & $\Col(A)$                      \\
+    \cs{onevec}                                 & $\onevec$                      \\
+    \cs{trsp}\Marg{A}                           & $\trsp{A}$                     \\
+    \cs{adjo}\Marg{A}                           & $\adjo{A}$                     \\
+    \cs{inpr}\Marg{x}\Marg{y}                   & $\inpr{x}{y}$                  \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -195,13 +194,13 @@
 \subsection{Analysis}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output         \\\midrule
-    \verb|\e|   & $\e$           \\
-    \verb|\d|   & $\d$           \\
-    \verb|\dif{f}{x}|   & $\dif{f}{x}$   \\
-    \verb|\pdif{f}{x}|   & $\pdif{f}{x}$  \\
-    \verb|\ddif{f}{x}|   & $\ddif{f}{x}$  \\
-    \verb|\dpdif{f}{x}|   & $\dpdif{f}{x}$ \\
+    \multicolumn{1}{c}{Input}  & Output         \\\midrule
+    \cs{e}                     & $\e$           \\
+    \cs{d}                     & $\d$           \\
+    \cs{dif}\Marg{f}\Marg{x}   & $\dif{f}{x}$   \\
+    \cs{pdif}\Marg{f}\Marg{x}  & $\pdif{f}{x}$  \\
+    \cs{ddif}\Marg{f}\Marg{x}  & $\ddif{f}{x}$  \\
+    \cs{dpdif}\Marg{f}\Marg{x} & $\dpdif{f}{x}$ \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -209,16 +208,16 @@
 \subsection{Complex Analysis}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output            \\\midrule
-    \verb|\i|   & $\i$              \\
-    \verb|\Re z|   & $\Re z$           \\
-    \verb|\Im z|   & $\Im z$           \\
-    \verb|\Arg z|   & $\Arg z$          \\
-    \verb|\Log z|   & $\Log z$          \\
-    \verb|\Sin z|   & $\Sin z$          \\
-    \verb|\Cos z|   & $\Cos z$          \\
-    \verb|\Tan z|   & $\Tan z$          \\
-    \verb|\Res_{z=0} f(z)|   & $\Res_{z=0} f(z)$ \\
+    \multicolumn{1}{c}{Input}                      & Output            \\\midrule
+    \cs{i}                                         & $\i$              \\
+    \code{\cs{Re} z}                               & $\Re z$           \\
+    \code{\cs{Im} z}                               & $\Im z$           \\
+    \code{\cs{Arg} z}                              & $\Arg z$          \\
+    \code{\cs{Loc} z}                              & $\Log z$          \\
+    \code{\cs{Sin} z}                              & $\Sin z$          \\
+    \code{\cs{Cos} z}                              & $\Cos z$          \\
+    \code{\cs{Tan} z}                              & $\Tan z$          \\
+    \code{\cs{Res}\_\string{z=0\string} f\Darg{z}} & $\Res_{z=0} f(z)$ \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -226,193 +225,84 @@
 \subsection{Optimization}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output                   \\\midrule
-    \verb|\argmin_{x \in S} f(x)|   & $\argmin_{x \in S} f(x)$ \\
-    \verb|\argmax_{x \in S} f(x)|   & $\argmax_{x \in S} f(x)$ \\
-    \verb|\Order(n) |  & $\Order(n)$              \\
-    \verb|\order(n) |  & $\order(n)$              \\
+    \multicolumn{1}{c}{Input}                                 & Output                   \\\midrule
+    \code{\cs{argmin}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmin_{x \in S} f(x)$ \\
+    \code{\cs{argmax}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmax_{x \in S} f(x)$ \\
+    \cs{Order}\Darg{n}                                        & $\Order(n)$              \\
+    \cs{order}\Darg{n}                                        & $\order(n)$              \\
     \bottomrule
   \end{tabular}
 \end{center}
 
-\section{The \texttt{okithm} Package}
+\section{The \pkg*{okithm} Package}
 \subsection{Theorems}
 
-If the option \texttt{language = Japanese} is given, \texttt{okithm} will translate all the environment titles (Theorem, Definition, etc.) into Japanese.
-You can disable theorems by setting the option \texttt{notheorem}.
+If the language is set to Japanese like by \cs{usepackage}\Oarg{\keyis-{main}{japanese}}\Marg{\pkg{babel}}, \pkg{okithm} will translate all the environment titles (Theorem, Definition, etc.) into Japanese.
+You can disable theorems by giving the option \option{notheorem} to \pkg{okicmd}.
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{theorem}[Awesome theorem]
-  The square root $\sqrt{2}$ of two is irrational.
-\end{theorem}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
+\begin{cnltxexample}
   \begin{theorem}[Awesome theorem]
     The square root $\sqrt{2}$ of two is irrational.
   \end{theorem}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{definition}[Coprime]
-  Integers $a$ and $b$ are said to be \emph{coprime} if their greatest
-  common divisor is one.
-\end{definition}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
   \begin{definition}[Coprime]
-    Integers $a$ and $b$ are said to be \emph{coprime} if their greatest
-    common divisor is one.
+    Integers $a$ and $b$ are said to be \emph{coprime} if their greatest common divisor is one.
   \end{definition}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{lemma}
-  If $a$ and $b$ are coprime, so are $a^2$ and $b^2$.
-\end{lemma}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
   \begin{lemma}
     If $a$ and $b$ are coprime, so are $a^2$ and $b^2$.
   \end{lemma}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{proposition}
-  If $\sqrt{2} = a/b$, then $a^2 = 2b^2$.
-\end{proposition}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
   \begin{proposition}
     If $\sqrt{2} = a/b$, then $a^2 = 2b^2$.
   \end{proposition}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{corollary}
-  If $\sqrt{2} = a/b$ with $a$ and $b$ being coprime, then $a$ is even.
-\end{corollary}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
   \begin{corollary}
     If $\sqrt{2} = a/b$ with $a$ and $b$ being coprime, then $a$ is even.
   \end{corollary}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{example}
-  If $a = 2$ and $b = 1$, then $a$ is even but $\sqrt{2} \ne a/b$.
-\end{example}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
   \begin{example}
     If $a = 2$ and $b = 1$, then $a$ is even but $\sqrt{2} \ne a/b$.
   \end{example}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{remark}
-  Note that $a$ and $b$ must be integers.
-\end{remark}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
   \begin{remark}
     Note that $a$ and $b$ must be integers.
   \end{remark}
-\end{itembox}
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{proof}
-  Suppose to the contrary that $\sqrt{2} = a/b$ with coprime $a$ and $b$.
-  Then both $a$ and $b$ are even, which contradicts the assumption.
-\end{proof}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
-  \begin{proof}
+  \begin{proof}[of Awesome theorem]
     Suppose to the contrary that $\sqrt{2} = a/b$ with coprime $a$ and $b$.
     Then both $a$ and $b$ are even, which contradicts the assumption.
   \end{proof}
-\end{itembox}
+\end{cnltxexample}
 
 \subsection{Algorithms}
 
-You can disable algorithms by setting the option \texttt{noalgorithm}.
+You can disable algorithms by setting the option \option{noalgorithm}.
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\begin{algorithm}[htbp]
-  \begin{algorithmic}[1]
-    \Input{$n \in \setN$}
-    \Output{$n(n+1)/2$}
-    \State{$s \gets 0$}
-    \ForTo{$i = 1$}{$n$}
-      \State{$s \gets s + i$}
-    \EndFor
-    \State{\Return $s$}
-  \end{algorithmic}
-\end{algorithm}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
+\begin{cnltxexample}
   \begin{algorithmic}[1]
     \Input{$n \in \setN$}
     \Output{$n(n+1)/2$}
     \State{$s \gets 0$}
     \ForTo{$i = 1$}{$n$}
     \State{$s \gets s + i$}
-    \EndFor{}
-    \State{\Return{} $s$}
+    \EndFor
+    \State{\Return $s$}
   \end{algorithmic}
-\end{itembox}
+\end{cnltxexample}
 
 \subsection{Optimization Problems}
 
-You can change \texttt{minimize}, \texttt{maximize} and \texttt{subject to} into \texttt{min}, \texttt{max} and \texttt{s.t.}, respectively, by setting the option \texttt{optstyle=short}.
+You can change \texttt{minimize}, \texttt{maximize} and \texttt{subject to} into \texttt{min}, \texttt{max} and \texttt{s.t.}, respectively, by setting the option \keyis-{optstyle}{short}.
 
-\begin{itembox}[l]{Input}
-  \begin{verbatim}
-\Minimize[name={(P)}]{
-  \sum_{\condit{x \in S}[x^2 = 1]} w(x) + \sum_{i=1}^n (p_i + q_i)
-}{
-  S \subseteq V, \\
-  p_i \ge 0 & (i = 1, \ldots, n), \\
-  q_i \ge 0 & (i = 1, \ldots, n)
-}
-\end{verbatim}
-\end{itembox}
-
-\begin{itembox}[l]{Output}
+\begin{cnltxexample}
   \Minimize[name={(P)}]{
-    \sum_{\condit{x \in{} S}[x^2 = 1]} w (x) + \sum_{i=1}^n (p_i + q_i)
+    \sum_{\condit{x \in S}[x^2 = 1]} w (x) + \sum_{i=1}^n (p_i + q_i)
   }{
-    S \subseteq{} V, \\
-    p_i \ge{} 0 & (i = 1, \ldots, n), \\
-    q_i \ge{} 0 & (i = 1, \ldots, n)
+    S \subseteq V, \\
+    p_i \ge 0 & (i = 1, \ldots, n), \\
+    q_i \ge 0 & (i = 1, \ldots, n)
   }
-\end{itembox}
+\end{cnltxexample}
 
 \end{document}
