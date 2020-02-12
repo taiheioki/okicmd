@@ -2,5 +2,7 @@ CmdLine
 {
   -n1  # Command terminated with space.
   -n8  # Wrong length of dash may have been used.
+  -n21 # This command might not be intended.
+  -n36 # You should put a space in front of parenthesis.
   -n46 # Use \( ... \) instead of $ ... $.
 }

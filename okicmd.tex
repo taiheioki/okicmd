@@ -16,6 +16,7 @@
 % Misc
 \usepackage{autonum}
 \usepackage{booktabs}
+\usepackage{comment}
 \usepackage[en-US]{datetime2}
 
 % Code execution and highlight
@@ -37,89 +38,99 @@
 
 \section{The \pkg*{okicmd} Package}
 
-\subsection{Alphabets}
+\subsection{Letters}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output        \\\midrule
-    \code{l}                  & $l$           \\
-    \cs{ell}                  & $\ell$        \\
-    \cs{epsilon}              & $\epsilon$    \\
-    \cs{varepsilon}           & $\varepsilon$ \\
-    \cs{phi}                  & $\phi$        \\
-    \cs{varphi}               & $\varphi$     \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input} & Output        & \multicolumn{1}{c}{\LaTeX\ equivalent} \\\midrule
+    \code{l}                  & $l$           & \cs{ell}                               \\
+    \cs{ell}                  & $\ell$        & \code{l}                               \\
+    \cs{epsilon}              & $\epsilon$    & \cs{varepsilon}                        \\
+    \cs{varepsilon}           & $\varepsilon$ & \cs{epsilon}                           \\
+    \cs{phi}                  & $\phi$        & \cs{varphi}                            \\
+    \cs{varphi}               & $\varphi$     & \cs{phi}                               \\
     \bottomrule
   \end{tabular}
 \end{center}
 
 \subsection{Parentheses}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input}                & Output               \\\midrule
-    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        \\
-    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  \\
-    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  \\
-    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ \\
-    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ \\
-    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       \\
-    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       \\
-    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       \\
-    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       \\
-    \cs{abs}\Marg{\cs{cdot}}                 & $\abs{\cdot}$        \\
-    \cs{norm}\Marg{\cs{cdot}}                & $\norm{\cdot}$       \\
-    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      \\
-    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ equivalent}                   \\\midrule
+    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{left}(\cs{cdot}\cs{right})}                    \\
+    \code{\cs{prn}*\Marg{\cs{cdot}}}         & $\prn*{\cdot}$       & \code{(\cs{cdot})}                                       \\
+    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                     \\
+    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                     \\
+    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                   \\
+    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ & \code{\cs{Biggl}(\cs{cdot}\cs{Biggr})}                   \\
+    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       & \code{\cs{left}\cs{}\{\cs{cdot}\cs{right}\cs{}\}}        \\
+    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       & \code{\cs{left}\lbrack\cs{cdot}\cs{right}\rbrack}        \\
+    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       & \cs{left}\cs{langle}\cs{cdot}\cs{right}\cs{rangle}       \\
+    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       & \cs{left}\cs{llbracket}\cs{cdot}\cs{right}\cs{rrbracket} \\
+    \cs{pipe}\Marg{\cs{cdot}}                & $\pipe{\cdot}$       & \code{\cs{left}|\cs{cdot}\cs{right}|}                    \\
+    \cs{dbpp}\Marg{\cs{cdot}}                & $\dbpp{\cdot}$       & \code{\cs{left}\cs{}|\cs{cdot}\cs{right}\cs{}|}          \\
+    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      & \cs{left}\cs{lfloor}\cs{cdot}\cs{right}\cs{rfloor}       \\
+    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       & \cs{left}\cs{lceil}\cs{cdot}\cs{right}\cs{rceil}         \\
     \bottomrule
   \end{tabular}
 \end{center}
 
 \subsection{Logic}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output        \\\midrule
-    \cs{bigland}              & $\bigland$    \\
-    \cs{biglor}               & $\biglor$     \\
-    \code{a \cs{defeq} b}     & $a \defeq b$  \\
-    \code{a \cs{eqdef} b}     & $b \eqdef a$  \\
-    \code{P \cs{defiff} Q}    & $P \defiff Q$ \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input} & Output        & \multicolumn{1}{c}{\LaTeX\ equivalent}                             \\\midrule
+    \cs{bigland}              & $\bigland$    & \cs{bigwedge}                                                      \\
+    \cs{biglor}               & $\biglor$     & \cs{bigvee}                                                        \\
+    \code{a \cs{defeq} b}     & $a \defeq b$  & \code{a \cs{coloneqq} b}                                           \\
+    \code{a \cs{eqdef} b}     & $b \eqdef a$  & \code{a \cs{eqqcolon} b}                                           \\
+    \code{P \cs{defiff} Q}    & $P \defiff Q$ & \code{P \cs{overset}\Marg{\cs{mathrm}\Marg{def}}\Marg{\cs{iff}} Q} \\
     \bottomrule
   \end{tabular}
 \end{center}
 
+\makeatletter
+\begin{align}
+\end{align}
+\makeatother
+
 \subsection{Sets}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input}                       & Output                   \\\midrule
-    \cs{set}\Marg{a \cs{in} S}                      & $\set{a \in S}$          \\
-    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ \\
-    \cs{intset}\Marg{n}                             & $\intset{n}$             \\
-    \cs{card}\Marg{X}                               & $\card{X}$               \\
-    \code{X \cs{symdif} Y}                          & $X \symdif Y$            \\
-    \cs{setN}                                       & $\setN$                  \\
-    \cs{setZ}                                       & $\setZ$                  \\
-    \cs{setQ}                                       & $\setQ$                  \\
-    \cs{setR}                                       & $\setR$                  \\
-    \cs{setC}                                       & $\setC$                  \\
-    \cs{setH}                                       & $\setH$                  \\
-    \cs{setF}                                       & $\setF$                  \\
-    \cs{setK}                                       & $\setK$                  \\
-    \cs{setZp}                                      & $\setZp$                 \\
-    \cs{setQp}                                      & $\setQp$                 \\
-    \cs{setRp}                                      & $\setRp$                 \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input}                       & Output                   & \multicolumn{1}{c}{\LaTeX\ equivalent}              \\\midrule
+    \cs{set}\Marg{a \cs{in} S}                      & $\set{a \in S}$          & \code{\cs{left}\cs{}\{a \cs{in} S\cs{right}\cs{}\}} \\
+    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{}\{a \cs{in} S \cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{} a\string^2 = 1\cs{right}\cs{}\}}\end{tabular}                           \\ % chktex 44
+    \cs{card}\Marg{X}                               & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
+    \cs{intset}\Marg{n}                             & $\intset{n}$             & \code{\cs{left}\lbrack n\cs{right}\rbrack}          \\
+    \code{X \cs{symdif} Y}                          & $X \symdif Y$            & \code{X \cs{mathbin}\Marg{\cs{triangle}} Y}         \\
+    \cs{setN}                                       & $\setN$                  & \cs{mathbb}\Marg{N}                                 \\
+    \cs{setZ}                                       & $\setZ$                  & \cs{mathbb}\Marg{Z}                                 \\
+    \cs{setQ}                                       & $\setQ$                  & \cs{mathbb}\Marg{Q}                                 \\
+    \cs{setR}                                       & $\setR$                  & \cs{mathbb}\Marg{R}                                 \\
+    \cs{setC}                                       & $\setC$                  & \cs{mathbb}\Marg{C}                                 \\
+    \cs{setH}                                       & $\setH$                  & \cs{mathbb}\Marg{H}                                 \\
+    \cs{setF}                                       & $\setF$                  & \cs{mathbb}\Marg{F}                                 \\
+    \cs{setK}                                       & $\setK$                  & \cs{mathbb}\Marg{K}                                 \\
+    \cs{setZp}                                      & $\setZp$                 & \code{\cs{mathbb}\Marg{Z}\_\{\cs{ge}0\}}            \\
+    \cs{setQp}                                      & $\setQp$                 & \code{\cs{mathbb}\Marg{Q}\_\{\cs{ge}0\}}            \\
+    \cs{setRp}                                      & $\setRp$                 & \code{\cs{mathbb}\Marg{R}\_\{\cs{ge}0\}}            \\
+    \cs{setNpp}                                     & $\setNpp$                & \code{\cs{mathbb}\Marg{N}\_\{>0\}}                  \\
+    \cs{setZpp}                                     & $\setZpp$                & \code{\cs{mathbb}\Marg{Z}\_\{>0\}}                  \\
+    \cs{setQpp}                                     & $\setQpp$                & \code{\cs{mathbb}\Marg{Q}\_\{>0\}}                  \\
+    \cs{setRpp}                                     & $\setRpp$                & \code{\cs{mathbb}\Marg{R}\_\{>0\}}                  \\
     \bottomrule
   \end{tabular}
 \end{center}
 
 \subsection{Maps}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input}             & Output               \\\midrule
-    \cs{doms}\Marg{X}\Marg{Y}             & $\doms{X}{Y}$        \\
-    \cs{funcdoms}\Marg{f}\Marg{X}\Marg{Y} & $\funcdoms{f}{X}{Y}$ \\
-    \cs{restr}\Marg{f}\Marg{S}            & $\restr{f}{S}$       \\
-    \code{\cs{id}\_K}                     & $\id_K$              \\
-    \code{\cs{dom} f}                     & $\dom f$             \\
-    \code{\cs{cod} f}                     & $\cod f$             \\
-    \code{\cs{supp} f}                    & $\supp f$            \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input}             & Output               & \multicolumn{1}{c}{\LaTeX\ equivalent}       \\\midrule
+    \cs{doms}\Marg{X}\Marg{Y}             & $\doms{X}{Y}$        & \code{\{X\}\cs{to}\{Y\}}                     \\
+    \cs{funcdoms}\Marg{f}\Marg{X}\Marg{Y} & $\funcdoms{f}{X}{Y}$ & \code{\{f\}\cs{vcentcolon}\{X\}\cs{to}\{Y\}} \\
+    \cs{restr}\Marg{f}\Marg{S}            & $\restr{f}{S}$       & \code{\cs{left}.f\cs{right}|\_\{S\}}         \\
+    \code{\cs{id}\_K}                     & $\id_K$              & \code{\cs{operatorname}\Marg{id}\_K}         \\
+    \code{\cs{dom} f}                     & $\dom f$             & \code{\cs{operatorname}\Marg{dom} f}         \\
+    \code{\cs{cod} f}                     & $\cod f$             & \code{\cs{operatorname}\Marg{cod} f}         \\
+    \code{\cs{supp} f}                    & $\supp f$            & \code{\cs{operatorname}\Marg{supp} f}        \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -139,26 +150,26 @@
 \subsection{Algebra}
 \begin{center}
   \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input}                  & Output               \\\midrule
-    \cs{Hom}\Darg{G}                           & $\Hom(G)$            \\
-    \code{\cs{End} R}                          & $\End R$             \\
-    \code{\cs{Aut}\_k K}                       & $\Aut_k K$           \\
-    \cs{gen}\Marg{a, b}                        & $\gen{a, b}$         \\
-    \cs{gen}\Marg{a, b}\Oarg{ab = e}           & $\gen{a, b}[ab = e]$ \\
-    \cs{abel}\Marg{G}                          & $\abel{G}$           \\
-    \cs{comm}\Marg{G}                          & $\comm{G}$           \\
-    \code{\cs{ord} G}                          & $\ord G$             \\
-    \code{\cs{sym}\_n}                         & $\sym_n$             \\
-    \cs{sgn}\Darg{\cs{sigma}}                  & $\sgn(\sigma)$       \\
-    \cs{mult}\Marg{R}                          & $\mult{R}$           \\
-    \code{\cs{M}\_\string{m,n\string}\Darg{R}} & $\M_{m,n}(R)$        \\
-    \code{\cs{GL}\_n\Darg{R}}                  & $\GL_n(R)$           \\
-    \code{\cs{SL}\_n\Darg{R}}                  & $\SL_n(R)$           \\
-    \cs{O}\Darg{n}                             & $\O(n)$              \\
-    \cs{SO}\Darg{n}                            & $\SO(n)$             \\
-    \cs{U}\Darg{n}                             & $\U(n)$              \\
-    \cs{SU}\Darg{n}                            & $\SU(n)$             \\
-    \code{L \cs{extends} K}                    & $L \extends K$       \\
+    \multicolumn{1}{c}{Input}                  & Output         \\\midrule
+    \cs{Hom}\Darg{G}                           & $\Hom(G)$      \\
+    \code{\cs{End} R}                          & $\End R$       \\
+    \code{\cs{Aut}\_k K}                       & $\Aut_k K$     \\
+    %    \cs{gen}\Marg{a, b}                        & $\gen{a, b}$         \\
+    %    \cs{gen}\Marg{a, b}\Oarg{ab = e}           & $\gen{a, b}[ab = e]$ \\
+    \cs{abel}\Marg{G}                          & $\abel{G}$     \\
+    \cs{comm}\Marg{G}                          & $\comm{G}$     \\
+    \code{\cs{ord} G}                          & $\ord G$       \\
+    \code{\cs{sym}\_n}                         & $\sym_n$       \\
+    \cs{sgn}\Darg{\cs{sigma}}                  & $\sgn(\sigma)$ \\
+    \cs{mult}\Marg{R}                          & $\mult{R}$     \\
+    \code{\cs{M}\_\string{m,n\string}\Darg{R}} & $\M_{m,n}(R)$  \\
+    \code{\cs{GL}\_n\Darg{R}}                  & $\GL_n(R)$     \\
+    \code{\cs{SL}\_n\Darg{R}}                  & $\SL_n(R)$     \\
+    \cs{O}\Darg{n}                             & $\O(n)$        \\
+    \cs{SO}\Darg{n}                            & $\SO(n)$       \\
+    \cs{U}\Darg{n}                             & $\U(n)$        \\
+    \cs{SU}\Darg{n}                            & $\SU(n)$       \\
+    \code{L \cs{extends} K}                    & $L \extends K$ \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -298,6 +309,7 @@ You can disable algorithms by setting the option \option{noalgorithm}.
 
 You can change \texttt{minimize}, \texttt{maximize} and \texttt{subject to} into \texttt{min}, \texttt{max} and \texttt{s.t.}, respectively, by setting the option \keyis-{optstyle}{short}.
 
+\begin{comment}
 \begin{cnltxexample}
   \Minimize[name={(P)}]{
     \sum_{\condit{x \in S}[x^2 = 1]} w (x) + \sum_{i=1}^n (p_i + q_i)
@@ -307,5 +319,7 @@ You can change \texttt{minimize}, \texttt{maximize} and \texttt{subject to} into
     q_i \ge 0 & (i = 1, \ldots, n)
   }
 \end{cnltxexample}
+\end{comment}
+
 
 \end{document}
