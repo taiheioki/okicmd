@@ -239,28 +239,28 @@
 \subsection{Complex Analysis}
 \begin{center}
   \begin{tabular}{lcl} \toprule
-    \multicolumn{1}{c}{Input}                      & Output            & \multicolumn{1}{c}{\LaTeX\ equivalent}\\\midrule
-    \cs{i}                                         & $\i$              & \code{\cs{mathrm}\Marg{i}} \\
-    \code{\cs{Re} z}                               & $\Re z$           & \code{\cs{operatorname}\Marg{Re} z} \\
-    \code{\cs{Im} z}                               & $\Im z$           & \code{\cs{operatorname}\Marg{Im} z}\\
-    \code{\cs{Arg} z}                              & $\Arg z$          & \code{\cs{operatorname}\Marg{Arg} z} \\
-    \code{\cs{Log} z}                              & $\Log z$          & \code{\cs{operatorname}\Marg{Log} z} \\
-    \code{\cs{Sin} z}                              & $\Sin z$          & \code{\cs{operatorname}\Marg{Sin} z}\\
-    \code{\cs{Cos} z}                              & $\Cos z$          & \code{\cs{operatorname}\Marg{Cos} z}\\
-    \code{\cs{Tan} z}                              & $\Tan z$          & \code{\cs{operatorname}\Marg{Tan} z}\\
-    \code{\cs{Res}\_\string{z=0\string} f\Darg{z}} & $\Res_{z=0} f(z)$ & \code{\cs{operatorname*}\Marg{Res}\_\{z=0\} f(z)}\\
+    \multicolumn{1}{c}{Input}                      & Output            & \multicolumn{1}{c}{\LaTeX\ equivalent}            \\\midrule
+    \cs{i}                                         & $\i$              & \code{\cs{mathrm}\Marg{i}}                        \\
+    \code{\cs{Re} z}                               & $\Re z$           & \code{\cs{operatorname}\Marg{Re} z}               \\
+    \code{\cs{Im} z}                               & $\Im z$           & \code{\cs{operatorname}\Marg{Im} z}               \\
+    \code{\cs{Arg} z}                              & $\Arg z$          & \code{\cs{operatorname}\Marg{Arg} z}              \\
+    \code{\cs{Log} z}                              & $\Log z$          & \code{\cs{operatorname}\Marg{Log} z}              \\
+    \code{\cs{Sin} z}                              & $\Sin z$          & \code{\cs{operatorname}\Marg{Sin} z}              \\
+    \code{\cs{Cos} z}                              & $\Cos z$          & \code{\cs{operatorname}\Marg{Cos} z}              \\
+    \code{\cs{Tan} z}                              & $\Tan z$          & \code{\cs{operatorname}\Marg{Tan} z}              \\
+    \code{\cs{Res}\_\string{z=0\string} f\Darg{z}} & $\Res_{z=0} f(z)$ & \code{\cs{operatorname*}\Marg{Res}\_\{z=0\} f(z)} \\
     \bottomrule
   \end{tabular}
 \end{center}
 
 \subsection{Optimization}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input}                                 & Output                   \\\midrule
-    \code{\cs{argmin}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmin_{x \in S} f(x)$ \\
-    \code{\cs{argmax}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmax_{x \in S} f(x)$ \\
-    \cs{Order}\Darg{n}                                        & $\Order(n)$              \\
-    \cs{order}\Darg{n}                                        & $\order(n)$              \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input}                                 & Output                   & \multicolumn{1}{c}{\LaTeX\ equivalent} \\\midrule
+    \code{\cs{argmin}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmin_{x \in S} f(x)$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname*}\Marg{arg\string~min}}\\\code{ \_\{x \cs{in} S\} f(x)}\end{tabular}             \\
+    \code{\cs{argmax}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmax_{x \in S} f(x)$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname*}\Marg{arg\string~max}}\\\code{ \_\{x \cs{in} S\} f(x)}\end{tabular}             \\
+    \cs{Order}\Darg{n}                                        & $\Order(n)$              & \code{\cs{mathrm}\Marg{O}(n)}          \\
+    \cs{order}\Darg{n}                                        & $\order(n)$              & \code{\cs{mathrm}\Marg{o}(n)}          \\
     \bottomrule
   \end{tabular}
 \end{center}

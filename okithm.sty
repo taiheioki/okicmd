@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2020/02/02 v0.5]
+\ProvidesPackage{okithm}[2020/04/27 v0.6]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
@@ -10,6 +10,8 @@
 \DeclareStringOption[section]{numberwithin}
 \DeclareStringOption[long]{optstyle}
 \ProcessKeyvalOptions*{}
+\DeclareBoolOption[true]{enumitem}
+\DeclareComplementaryOption{noenumitem}{enumitem}
 
 % ======== Theorems ========
 \ifokithm@theorems
@@ -162,10 +164,12 @@
 \okithm@DeclareOptProb{\Maximize}{maximize}{max}{subject to}{s.t.}
 
 % ======== Enumeration ========
-\RequirePackage{enumitem}
+\ifokithm@enumitem
+  \RequirePackage{enumitem}
 
-\setlist{font=\upshape,leftmargin=*}
-\setlist[1]{labelindent=\parindent}
-\setlist[enumerate,1]{label={(\arabic*)}}
-\setlist[enumerate,2]{label={(\arabic{enumi}-\arabic*)}}
-\setlist[enumerate,3]{label={(\arabic{enumi}-\arabic{enumii}-\arabic*)}}
+  \setlist{font=\upshape,leftmargin=*}
+  \setlist[1]{labelindent=\parindent}
+  \setlist[enumerate,1]{label={(\arabic*)}}
+  \setlist[enumerate,2]{label={(\arabic{enumi}-\arabic*)}}
+  \setlist[enumerate,3]{label={(\arabic{enumi}-\arabic{enumii}-\arabic*)}}
+\fi
