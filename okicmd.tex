@@ -55,7 +55,7 @@
 \subsection{Parentheses}
 \begin{center}
   \begin{tabular}{lcl} \toprule
-    \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ equivalent}                   \\\midrule
+    \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}          \\\midrule
     \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{left}(\cs{cdot}\cs{right})}                    \\
     \code{\cs{prn}*\Marg{\cs{cdot}}}         & $\prn*{\cdot}$       & \code{(\cs{cdot})}                                       \\
     \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                     \\
@@ -87,19 +87,13 @@
   \end{tabular}
 \end{center}
 
-\makeatletter
-\begin{align}
-\end{align}
-\makeatother
-
 \subsection{Sets}
 \begin{center}
   \begin{tabular}{lcl} \toprule
-    \multicolumn{1}{c}{Input}                       & Output                   & \multicolumn{1}{c}{\LaTeX\ equivalent}              \\\midrule
+    \multicolumn{1}{c}{Input}                       & Output                   & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}     \\\midrule
     \cs{set}\Marg{a \cs{in} S}                      & $\set{a \in S}$          & \code{\cs{left}\cs{}\{a \cs{in} S\cs{right}\cs{}\}} \\
-    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{}\{a \cs{in} S \cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{} a\string^2 = 1\cs{right}\cs{}\}}\end{tabular}                           \\ % chktex 44
+    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{}\{a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{}\}}\end{tabular}                           \\ % chktex 44
     \cs{card}\Marg{X}                               & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
-    \cs{intset}\Marg{n}                             & $\intset{n}$             & \code{\cs{left}\lbrack n\cs{right}\rbrack}          \\
     \code{X \cs{symdif} Y}                          & $X \symdif Y$            & \code{X \cs{mathbin}\Marg{\cs{triangle}} Y}         \\
     \cs{setN}                                       & $\setN$                  & \cs{mathbb}\Marg{N}                                 \\
     \cs{setZ}                                       & $\setZ$                  & \cs{mathbb}\Marg{Z}                                 \\
@@ -137,50 +131,53 @@
 
 \subsection{Lattices}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output      \\\midrule
-    \code{x \cs{meet} y}      & $x \meet y$ \\
-    \code{x \cs{join} y}      & $x \join y$ \\
-    \cs{bigmeet}              & $\bigmeet$  \\
-    \cs{bigjoin}              & $\bigjoin$  \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input} & Output      & \multicolumn{1}{c}{\LaTeX\ equivalent}   \\\midrule
+    \code{x \cs{meet} y}      & $x \meet y$ & \code{x \cs{mathbin}\Marg{\cs{wedge}} y} \\
+    \code{x \cs{join} y}      & $x \join y$ & \code{x \cs{mathbin}\Marg{\cs{vee}} y}   \\
+    \cs{bigmeet}              & $\bigmeet$  & \cs{bigwedge}                            \\
+    \cs{bigjoin}              & $\bigjoin$  & \cs{bigvee}                              \\
     \bottomrule
   \end{tabular}
 \end{center}
 
 \subsection{Algebra}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input}                  & Output         \\\midrule
-    \cs{Hom}\Darg{G}                           & $\Hom(G)$      \\
-    \code{\cs{End} R}                          & $\End R$       \\
-    \code{\cs{Aut}\_k K}                       & $\Aut_k K$     \\
-    %    \cs{gen}\Marg{a, b}                        & $\gen{a, b}$         \\
-    %    \cs{gen}\Marg{a, b}\Oarg{ab = e}           & $\gen{a, b}[ab = e]$ \\
-    \cs{abel}\Marg{G}                          & $\abel{G}$     \\
-    \cs{comm}\Marg{G}                          & $\comm{G}$     \\
-    \code{\cs{ord} G}                          & $\ord G$       \\
-    \code{\cs{sym}\_n}                         & $\sym_n$       \\
-    \cs{sgn}\Darg{\cs{sigma}}                  & $\sgn(\sigma)$ \\
-    \cs{mult}\Marg{R}                          & $\mult{R}$     \\
-    \code{\cs{M}\_\string{m,n\string}\Darg{R}} & $\M_{m,n}(R)$  \\
-    \code{\cs{GL}\_n\Darg{R}}                  & $\GL_n(R)$     \\
-    \code{\cs{SL}\_n\Darg{R}}                  & $\SL_n(R)$     \\
-    \cs{O}\Darg{n}                             & $\O(n)$        \\
-    \cs{SO}\Darg{n}                            & $\SO(n)$       \\
-    \cs{U}\Darg{n}                             & $\U(n)$        \\
-    \cs{SU}\Darg{n}                            & $\SU(n)$       \\
-    \code{L \cs{extends} K}                    & $L \extends K$ \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input}                  & Output               & \multicolumn{1}{c}{\LaTeX\ equivalent}               \\\midrule
+    \cs{Hom}\Darg{G}                           & $\Hom(G)$            & \code{\cs{operatorname}\Marg{Hom}(G)}                \\
+    \code{\cs{End} R}                          & $\End R$             & \code{\cs{operatorname}\Marg{End} R}                 \\
+    \code{\cs{Aut}\_k K}                       & $\Aut_k K$           & \code{\cs{operatorname}\Marg{Aut}\_k K}              \\
+    \cs{gen}\Marg{a, b}                        & $\gen{a, b}$         & \code{\cs{left}\cs{langle}a, b\cs{right}\cs{rangle}} \\
+    \cs{gen}\Marg{a, b}\Oarg{ab = e}           & $\gen{a, b}[ab = e]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{langle}a, b\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}ab = e\cs{right}\cs{rangle}}\end{tabular}                            \\ % chktex 44
+    \cs{abel}\Marg{G}                          & $\abel{G}$           & \code{G\_\{\cs{mathrm}\Marg{ab}\}}                   \\
+    \cs{comm}\Marg{G}                          & $\comm{G}$           & \code{\cs{left}\lbrack G, G\cs{right}\rbrack}        \\
+    \code{\cs{ord} G}                          & $\ord G$             & \code{\cs{operatorname}\Marg{ord} G}                 \\
+    \code{\cs{sym}\_n}                         & $\sym_n$             & \code{\cs{mathfrak}\Marg{S}\_n}                      \\
+    \cs{sgn}\Darg{\cs{sigma}}                  & $\sgn(\sigma)$       & \code{\cs{operatorname}\Marg{sgn}(\cs{sigma})}       \\
+    \cs{mult}\Marg{R}                          & $\mult{R}$           & \code{R\string^\{\cs{times}\}}                       \\
+    \code{\cs{M}\_\string{m,n\string}\Darg{R}} & $\M_{m,n}(R)$        & \code{\cs{operatorname}\Marg{M}\_\{m,n\}(R)}         \\
+    \code{\cs{GL}\_n\Darg{R}}                  & $\GL_n(R)$           & \code{\cs{operatorname}\Marg{GL}\_n(R)}              \\
+    \code{\cs{SL}\_n\Darg{R}}                  & $\SL_n(R)$           & \code{\cs{operatorname}\Marg{SL}\_n(R)}              \\
+    \cs{O}\Darg{n}                             & $\O(n)$              & \code{\cs{operatorname}\Marg{O}(n)}                  \\
+    \cs{SO}\Darg{n}                            & $\SO(n)$             & \code{\cs{operatorname}\Marg{SO}(n)}                 \\
+    \cs{U}\Darg{n}                             & $\U(n)$              & \code{\cs{operatorname}\Marg{U}(n)}                  \\
+    \cs{SU}\Darg{n}                            & $\SU(n)$             & \code{\cs{operatorname}\Marg{SU}(n)}                 \\
+    \cs{GL}\Darg{q}                            & $\GL(q)$             & \code{\cs{operatorname}\Marg{GL}(q)}                 \\
+    \code{L \cs{extends} K}                    & $L \extends K$       & \code{L \cs{mathbin}\Marg{/} K}                      \\
     \bottomrule
   \end{tabular}
 \end{center}
 
 \subsection{Number Theory}
 \begin{center}
-  \begin{tabular}{lc} \toprule
-    \multicolumn{1}{c}{Input} & Output          \\\midrule
-    \code{a \cs{coprime} b}   & $a \coprime b$  \\
-    \code{a \cs{divides} b}   & $a \divides b$  \\
-    \code{a \cs{ndivides} b}  & $a \ndivides b$ \\
+  \begin{tabular}{lcl} \toprule
+    \multicolumn{1}{c}{Input} & Output          & \multicolumn{1}{c}{\LaTeX\ equivalent}     \\\midrule
+    \cs{abs}\Marg{x}          & $\abs{x}$       & \code{\cs{left}|x\cs{right}|}              \\
+    \cs{intset}\Marg{n}       & $\intset{n}$    & \code{\cs{left}\lbrack n\cs{right}\rbrack} \\
+    \code{a \cs{coprime} b}   & $a \coprime b$  & \code{a \cs{mathrel}\Marg{\cs{bot}} b}     \\
+    \code{a \cs{divides} b}   & $a \divides b$  & \code{a \cs{mid} b}                        \\
+    \code{a \cs{ndivides} b}  & $a \ndivides b$ & \code{a \cs{nmid} b}                       \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -192,6 +189,7 @@
     \code{\cs{tr} A}                            & $\tr A$                        \\
     \code{\cs{rank} A}                          & $\rank A$                      \\
     \code{\cs{trank} A}                         & $\trank A$                     \\
+    \code{\cs{Pf} A}                            & $\Pf A$                        \\
     \cs{diag}\Darg{a\_1, \cs{ldots}, a\_n}      & $\diag(a_1, \ldots, a_n)$      \\
     \cs{blockdiag}\Darg{A\_1, \cs{ldots}, A\_n} & $\blockdiag(A_1, \ldots, A_n)$ \\
     \cs{vectorize}\Darg{A}                      & $\vectorize(A)$                \\
@@ -209,6 +207,10 @@
 \begin{center}
   \begin{tabular}{lc} \toprule
     \multicolumn{1}{c}{Input}  & Output         \\\midrule
+    \cs{intoo}\Marg{a, b}      & $\intoo{a, b}$ \\
+    \cs{intoc}\Marg{a, b}      & $\intoc{a, b}$ \\
+    \cs{intco}\Marg{a, b}      & $\intco{a, b}$ \\
+    \cs{intcc}\Marg{a, b}      & $\intcc{a, b}$ \\
     \cs{e}                     & $\e$           \\
     \cs{d}                     & $\d$           \\
     \cs{dif}\Marg{f}\Marg{x}   & $\dif{f}{x}$   \\

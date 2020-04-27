@@ -10,6 +10,11 @@
 \RequirePackage{xparse}
 \RequirePackage{xstring}
 
+% ======== Options ========
+\RequirePackage{kvoptions}
+\DeclareStringOption[vert]{middel}
+\ProcessKeyvalOptions*{}
+
 % ======== Letters ======
 \newcommand\okicmd@exchange[2]{\let\okicmd@tmp#1\let#1#2\let#2\okicmd@tmp}
 \okicmd@exchange{\epsilon}{\varepsilon}
@@ -39,13 +44,15 @@
 % #3: Command for \okicmd@auto
 \newcommand{\okicmd@DeclareDelimiter}[3]{%
   \newcommand{#1}[3]{%
+    \makeatletter%
     \IfStrEq{##1##2}{\okicmd@auto##2}{%
       #3%
     }{\IfStrEq{##1##2}{\okicmd@normal##2}{%
       #2##2%
     }{%
-      #2{##1##2}
+      #2{##1##2}%
     }}%
+    \makeatother%
   }%
 }
 
@@ -56,7 +63,7 @@
   \mathopen{\left#2\okicmd@vphantom{#3}\okicmd@kern\right.}%
 }
 \okicmd@DeclareDelimiter{\okicmd@middle}{\mathrel}{%
-  \mathrel{\left.\okicmd@kern\okicmd@vphantom{#3}\middle#2\okicmd@kern\right.}
+  \mathrel{\left.\okicmd@kern\okicmd@vphantom{#3}\middle#2\okicmd@kern\right.}%
 }
 \okicmd@DeclareDelimiter{\okicmd@right}{\mathclose}{%
   \mathclose{\left.\okicmd@kern\okicmd@vphantom{#3}\right#2}%
@@ -79,11 +86,7 @@
 % #5: Right content
 % #6: Right delimiter
 \newcommand{\okicmd@parenwithmiddle}[6]{%
-  \okicmd@left{#1}{#2}{{#3}{#5}}%
-  #3%
-  \okicmd@middle{#1}{#4}{{#3}{#5}}%
-  #5%
-  \okicmd@right{#1}{#6}{{#3}{#5}}%
+  \okicmd@paren{#1}{#2}{#3\okicmd@middle{#1}{#4}{{#3}{#5}}#5}{#6}%
 }
 
 \newcommand{\okicmd@size}[2]{%
@@ -133,7 +136,6 @@
 % ======== Sets ========
 \DeclareParenthesisWithMiddle{\set}{\lbrace}{\vert}{\rbrace}
 \let\card\pipe
-\let\intset\sqbr
 
 \newcommand{\symdif}{\mathbin{\triangle}}
 
@@ -198,6 +200,7 @@
 
 % ======== Number Theory ========
 \let\abs\pipe
+\let\intset\sqbr
 \newcommand{\coprime}{\mathrel{\bot}}
 \newcommand{\divides}{\mid}
 \newcommand{\ndivides}{\nmid}
@@ -206,6 +209,7 @@
 \DeclareMathOperator{\tr}{tr}
 \DeclareMathOperator{\rank}{rank}
 \DeclareMathOperator{\trank}{t-rank}
+\DeclareMathOperator{\Pf}{Pf}
 
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\blockdiag}{block-diag}
@@ -221,6 +225,10 @@
 \newcommand{\inpr}[2]{\agbr{#1, #2}}
 
 % ======== Analysis ========
+\DeclareParenthesis{\intoo}{\lparen}{\rparen}
+\DeclareParenthesis{\intoc}{\lparen}{\rbrack}
+\DeclareParenthesis{\intco}{\lbrack}{\rparen}
+\DeclareParenthesis{\intcc}{\lbrack}{\rbrack}
 \newcommand{\e}{\mathrm{e}}
 \renewcommand{\d}{\mathrm{d}}
 \newcommand{\dif}[2]{\frac{\d{#1}}{\d{#2}}}

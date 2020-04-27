@@ -221,3 +221,6 @@ TSWLatexianTemp*
 
 # cnltx-example
 *-cnltx.code
+
+# template file for latexindent
+__latexindent_temp.tex
