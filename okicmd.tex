@@ -60,7 +60,6 @@
   \begin{tabular}{lcl} \toprule
     \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}          \\\midrule
     \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{left}(\cs{cdot}\cs{right})}                    \\
-    \code{\cs{prn}*\Marg{\cs{cdot}}}         & $\prn*{\cdot}$       & \code{(\cs{cdot})}                                       \\
     \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                     \\
     \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                     \\
     \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                   \\
@@ -93,26 +92,27 @@
 \subsection{Sets}
 \begin{center}
   \begin{tabular}{lcl} \toprule
-    \multicolumn{1}{c}{Input}                       & Output                   & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}     \\\midrule
-    \cs{set}\Marg{a \cs{in} S}                      & $\set{a \in S}$          & \code{\cs{left}\cs{\{}a \cs{in} S\cs{right}\cs{\}}} \\
-    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
-    \cs{card}\Marg{X}                               & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
-    \code{X \cs{symdif} Y}                          & $X \symdif Y$            & \code{X \cs{mathbin}\Marg{\cs{triangle}} Y}         \\
-    \cs{setN}                                       & $\setN$                  & \cs{mathbb}\Marg{N}                                 \\
-    \cs{setZ}                                       & $\setZ$                  & \cs{mathbb}\Marg{Z}                                 \\
-    \cs{setQ}                                       & $\setQ$                  & \cs{mathbb}\Marg{Q}                                 \\
-    \cs{setR}                                       & $\setR$                  & \cs{mathbb}\Marg{R}                                 \\
-    \cs{setC}                                       & $\setC$                  & \cs{mathbb}\Marg{C}                                 \\
-    \cs{setH}                                       & $\setH$                  & \cs{mathbb}\Marg{H}                                 \\
-    \cs{setF}                                       & $\setF$                  & \cs{mathbb}\Marg{F}                                 \\
-    \cs{setK}                                       & $\setK$                  & \cs{mathbb}\Marg{K}                                 \\
-    \cs{setZp}                                      & $\setZp$                 & \code{\cs{mathbb}\Marg{Z}\_\{\cs{ge}0\}}            \\
-    \cs{setQp}                                      & $\setQp$                 & \code{\cs{mathbb}\Marg{Q}\_\{\cs{ge}0\}}            \\
-    \cs{setRp}                                      & $\setRp$                 & \code{\cs{mathbb}\Marg{R}\_\{\cs{ge}0\}}            \\
-    \cs{setNpp}                                     & $\setNpp$                & \code{\cs{mathbb}\Marg{N}\_\{>0\}}                  \\
-    \cs{setZpp}                                     & $\setZpp$                & \code{\cs{mathbb}\Marg{Z}\_\{>0\}}                  \\
-    \cs{setQpp}                                     & $\setQpp$                & \code{\cs{mathbb}\Marg{Q}\_\{>0\}}                  \\
-    \cs{setRpp}                                     & $\setRpp$                & \code{\cs{mathbb}\Marg{R}\_\{>0\}}                  \\
+    \multicolumn{1}{c}{Input}                               & Output                   & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}     \\\midrule
+    \cs{set}\Marg{a \cs{in} S}                              & $\set{a \in S}$          & \code{\cs{left}\cs{\{}a \cs{in} S\cs{right}\cs{\}}} \\
+    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1}         & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
+    \code{\cs{set}*\Marg{a}\Oarg{\string$a\string$ is odd}} & $\set*{a}[$a$ is odd]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}\cs{text}\Marg{\string$a\string$ is odd}\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
+    \cs{card}\Marg{X}                                       & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
+    \code{X \cs{symdif} Y}                                  & $X \symdif Y$            & \code{X \cs{mathbin}\Marg{\cs{triangle}} Y}         \\
+    \cs{setN}                                               & $\setN$                  & \cs{mathbb}\Marg{N}                                 \\
+    \cs{setZ}                                               & $\setZ$                  & \cs{mathbb}\Marg{Z}                                 \\
+    \cs{setQ}                                               & $\setQ$                  & \cs{mathbb}\Marg{Q}                                 \\
+    \cs{setR}                                               & $\setR$                  & \cs{mathbb}\Marg{R}                                 \\
+    \cs{setC}                                               & $\setC$                  & \cs{mathbb}\Marg{C}                                 \\
+    \cs{setH}                                               & $\setH$                  & \cs{mathbb}\Marg{H}                                 \\
+    \cs{setF}                                               & $\setF$                  & \cs{mathbb}\Marg{F}                                 \\
+    \cs{setK}                                               & $\setK$                  & \cs{mathbb}\Marg{K}                                 \\
+    \cs{setZp}                                              & $\setZp$                 & \code{\cs{mathbb}\Marg{Z}\_\{\cs{ge}0\}}            \\
+    \cs{setQp}                                              & $\setQp$                 & \code{\cs{mathbb}\Marg{Q}\_\{\cs{ge}0\}}            \\
+    \cs{setRp}                                              & $\setRp$                 & \code{\cs{mathbb}\Marg{R}\_\{\cs{ge}0\}}            \\
+    \cs{setNpp}                                             & $\setNpp$                & \code{\cs{mathbb}\Marg{N}\_\{>0\}}                  \\
+    \cs{setZpp}                                             & $\setZpp$                & \code{\cs{mathbb}\Marg{Z}\_\{>0\}}                  \\
+    \cs{setQpp}                                             & $\setQpp$                & \code{\cs{mathbb}\Marg{Q}\_\{>0\}}                  \\
+    \cs{setRpp}                                             & $\setRpp$                & \code{\cs{mathbb}\Marg{R}\_\{>0\}}                  \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -193,7 +193,7 @@
     \code{\cs{rank} A}                        & $\rank A$                    & \code{\cs{operatorname}\Marg{rank} A}           \\
     \code{\cs{trank} A}                       & $\trank A$                   & \code{\cs{operatorname}\Marg{t-rank} A}         \\
     \code{\cs{Pf} A}                          & $\Pf A$                      & \code{\cs{operatorname}\Marg{Pf} A}             \\
-    \cs{diag}\Darg{a\_1,\cs{dotsc},a\_n}      & $\diag(a_1,\dotsc,a_n)$      & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname}\Marg{diag}}\\\code{ (a\_1,\cs{dotsc},a\_n)}\end{tabular}                       \\
+    \cs{diag}\Darg{a\_1,\cs{dotsc},a\_n}      & $\diag(a_1,\dotsc,a_n)$      & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname}\Marg{diag}}\\\code{ (a\_1,\cs{dotsc},a\_n)}\end{tabular}                      \\
     \cs{blockdiag}\Darg{A\_1,\cs{dotsc},A\_n} & $\blockdiag(A_1,\dotsc,A_n)$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname}\Marg{block-diag}}\\\code{ (A\_1,\cs{dotsc},A\_n)}\end{tabular}                      \\
     \cs{vectorize}\Darg{A}                    & $\vectorize(A)$              & \code{\cs{operatorname}\Marg{vectorize}(A)}     \\
     \cs{Row}\Darg{A}                          & $\Row(A)$                    & \code{\cs{operatorname}\Marg{Row}(A)}           \\

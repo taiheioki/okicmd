@@ -93,16 +93,12 @@
   \okicmd@paren{#1}{#2}{#3\okicmd@middle{#1}{#4}{{#3}{#5}}#5}{#6}%
 }
 
-\newcommand{\okicmd@size}[2]{%
-  \IfBooleanTF{#1}{\okicmd@normal}{#2}%
-}
-
 % #1: Macro name
 % #2: Left delimiter
 % #3: Right delimiter
 \newcommand{\DeclareParenthesis}[3]{%
   \NewDocumentCommand{#1}{sO{\okicmd@auto}m}{%
-    \okicmd@paren{\okicmd@size{##1}{##2}}{#2}{##3}{#3}%
+    \okicmd@paren{##2}{#2}{##3}{#3}%
   }%
 }
 
@@ -113,9 +109,9 @@
 \newcommand{\DeclareParenthesisWithMiddle}[4]{%
   \NewDocumentCommand{#1}{sO{\okicmd@auto}mo}{%
     \IfValueTF{##4}{%
-      \okicmd@parenwithmiddle{\okicmd@size{##1}{##2}}{#2}{##3}{#3}{##4}{#4}%
+      \okicmd@parenwithmiddle{##2}{#2}{##3}{#3}{\IfBooleanTF{##1}{\text{##4}}{##4}}{#4}%
     }{%
-      \okicmd@paren{\okicmd@size{##1}{##2}}{#2}{##3}{#4}%
+      \okicmd@paren{##2}{#2}{##3}{#4}%
     }%
   }%
 }
