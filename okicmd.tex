@@ -1,17 +1,24 @@
 % !TEX encoding = UTF-8 Unicode
 % !TEX root = okicmd.tex
-\RequirePackage[l2tabu, orthodox]{nag}
-\documentclass[11pt, a4paper]{article}
+% !TEX spellcheck = en-US
+% !TEX TS-program = latexmk
+\documentclass[11pt,a4paper]{article}
 
-% Margin & fonts
-\usepackage[top=1truein, bottom=1truein, left=1truein, right=1truein]{geometry}
-\usepackage{type1cm}
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+% Margin
+\usepackage[margin=1truein]{geometry}
+
+% Fonts
 \usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[utf8]{inputenc}
 
 % hyperref
-\usepackage[bookmarksnumbered, pdfdisplaydoctitle, pdfusetitle, unicode]{hyperref}
+\usepackage[bookmarksnumbered,pdfdisplaydoctitle,pdfusetitle,unicode]{hyperref}
+
+% Tables
+\usepackage{booktabs}
+\usepackage{tablefootnote}
 
 % Code execution and highlight
 \usepackage{cnltx-example}
@@ -19,19 +26,12 @@
 \let\example\relax
 \let\endexample\relax
 
-% Footnotes in tables
-\usepackage{tablefootnote}
-
 % Misc
-\usepackage{autonum}
-\usepackage{booktabs}
 \usepackage{comment}
-\usepackage[en-US]{datetime2}
 
 % okicmd
 \usepackage{okicmd}
 \usepackage{okithm}
-
 
 \title{The \pkg*{okicmd} and \pkg*{okithm} Packages}
 \author{Taihei Oki}
@@ -59,7 +59,7 @@
 \begin{center}
   \begin{tabular}{lcl} \toprule
     \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}          \\\midrule
-    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{left}(\cs{cdot}\cs{right})}\footnotemark       \\
+    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{left}(\cs{cdot}\cs{right})}                    \\
     \code{\cs{prn}*\Marg{\cs{cdot}}}         & $\prn*{\cdot}$       & \code{(\cs{cdot})}                                       \\
     \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                     \\
     \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                     \\
@@ -76,11 +76,6 @@
     \bottomrule
   \end{tabular}
 \end{center}
-\footnotetext{%
-  The exactly equivalent \LaTeX\ code is \code{\cs{mathopen}\Marg{\cs{left}(\cs{vphantom}\Marg{\cs{cdot}}\cs{kern}-\cs{nulldelimiterspace}\\
-      \cs{right}.}\cs{cdot}\cs{mathclose}\Marg{\cs{left}.\cs{kern}-\cs{nulldelimiterspace}\cs{vphantom}\Marg{\cs{cdot}}\cs{right})}}. % chktex 9
-  This is the same for other parenthesis commands.
-}
 
 \subsection{Logic}
 \begin{center}
@@ -100,7 +95,7 @@
   \begin{tabular}{lcl} \toprule
     \multicolumn{1}{c}{Input}                       & Output                   & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}     \\\midrule
     \cs{set}\Marg{a \cs{in} S}                      & $\set{a \in S}$          & \code{\cs{left}\cs{\{}a \cs{in} S\cs{right}\cs{\}}} \\
-    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{\}}\footnotemark}\end{tabular}                           \\ % chktex 44
+    \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1} & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
     \cs{card}\Marg{X}                               & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
     \code{X \cs{symdif} Y}                          & $X \symdif Y$            & \code{X \cs{mathbin}\Marg{\cs{triangle}} Y}         \\
     \cs{setN}                                       & $\setN$                  & \cs{mathbb}\Marg{N}                                 \\
@@ -121,13 +116,6 @@
     \bottomrule
   \end{tabular}
 \end{center}
-\footnotetext{%
-  The exactly equivalent \LaTeX\ code is \code{\cs{mathopen}\Marg{\cs{left}\cs{\{}\cs{vphantom}\Marg{a \cs{in} Sa\string^2 = 1}\cs{kern}-\\
-      \cs{nulldelimiterspace}\cs{right}.}a \cs{in} S\cs{mathrel}\Marg{\cs{left}.\cs{kern}-\cs{nulldelimiterspace}\cs{vphantom}\Marg{a \cs{in} Sa\string^2\\
-        = 1}\cs{middle}|\cs{kern}-\cs{nulldelimiterspace}\cs{right}.}a\string^2 = 1\cs{mathclose}\Marg{\cs{left}.\cs{kern}-\cs{nulldelimiterspace}\\
-      \cs{vphantom}\Marg{a \cs{in} Sa\string^2 = 1}\cs{right}\cs{\}}}}. % chktex 9
-  This is the same for other parenthesis commands with middle bars.
-}
 
 \subsection{Maps}
 \begin{center}
@@ -337,6 +325,5 @@ You can change \texttt{minimize}, \texttt{maximize} and \texttt{subject to} into
   }
 \end{cnltxexample}
 \end{comment}
-
 
 \end{document}

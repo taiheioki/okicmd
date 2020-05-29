@@ -1,5 +1,5 @@
 #!/usr/bin/env perl
-@default_files = ('okicmd.tex');
+@default_executed_files = ('okicmd.tex');
 
 $log_wrap = 4096;
 ensure_path('max_print_line', $log_wrap);

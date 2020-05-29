@@ -1,5 +1,6 @@
+% !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2020/04/27 v0.6]
+\ProvidesPackage{okithm}[2020/05/29 v0.7 by Taihei OKI]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
@@ -9,9 +10,9 @@
 \DeclareComplementaryOption{noalgorithm}{algorithms}
 \DeclareStringOption[section]{numberwithin}
 \DeclareStringOption[long]{optstyle}
-\ProcessKeyvalOptions*{}
 \DeclareBoolOption[true]{enumitem}
 \DeclareComplementaryOption{noenumitem}{enumitem}
+\ProcessKeyvalOptions*
 
 % ======== Theorems ========
 \ifokithm@theorems

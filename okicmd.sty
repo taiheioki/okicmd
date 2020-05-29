@@ -1,19 +1,23 @@
+% !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2020/04/27 v0.6]
+\ProvidesPackage{okicmd}[2020/05/29 v0.7 by Taihei OKI]
 
+% Math commands & symbols
 \RequirePackage{amsmath}
 \RequirePackage{amssymb}
 \RequirePackage{bm}
 \RequirePackage{dsfont}
 \RequirePackage{mathtools}
 \RequirePackage{stmaryrd}
+
+% For internal use
 \RequirePackage{xparse}
 \RequirePackage{xstring}
 
 % ======== Options ========
 \RequirePackage{kvoptions}
 \DeclareStringOption[vert]{middel}
-\ProcessKeyvalOptions*{}
+\ProcessKeyvalOptions*
 
 % ======== Letters ======
 \newcommand\okicmd@exchange[2]{\let\okicmd@tmp#1\let#1#2\let#2\okicmd@tmp}
@@ -40,7 +44,7 @@
 \newcommand{\okicmd@kern}{\kern-\nulldelimiterspace}
 
 % #1: Macro name
-% #2: Spacing (\mathopen, \mathrel, \mathclose)
+% #2: Spacing (\mathopen, \mathrel, or \mathclose)
 % #3: Command for \okicmd@auto
 \newcommand{\okicmd@DeclareDelimiter}[3]{%
   \newcommand{#1}[3]{%
@@ -56,7 +60,7 @@
   }%
 }
 
-% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, \Bigg)
+% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
 % #2: Delimiter
 % #3: Content
 \okicmd@DeclareDelimiter{\okicmd@left}{\mathopen}{%
@@ -69,7 +73,7 @@
   \mathclose{\left.\okicmd@kern\okicmd@vphantom{#3}\right#2}%
 }
 
-% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, \Bigg)
+% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
 % #2: Left delimiter
 % #3: Content
 % #4: Right delimiter
@@ -79,7 +83,7 @@
   \okicmd@right{#1}{#4}{#3}%
 }
 
-% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, \Bigg)
+% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
 % #2: Left delimiter
 % #3: Left content
 % #4: Middle delimiter
@@ -252,6 +256,6 @@
 % ======== Optimization ========
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\argmax}{arg\,max}
-\DeclareMathOperator{\Order}{O}
-\DeclareMathOperator{\order}{o}
+\newcommand{\Order}{\mathrm{O}}
+\newcommand{\order}{\mathrm{o}}
 \DeclareParenthesisWithMiddle{\condit}{.}{\vcentcolon}{.}
