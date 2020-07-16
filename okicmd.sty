@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2020/05/29 v0.7 by Taihei OKI]
+\ProvidesPackage{okicmd}[2020/07/16 v0.8 by Taihei OKI]
 
 % Math commands & symbols
 \RequirePackage{amsmath}
@@ -69,6 +69,9 @@
 \okicmd@DeclareDelimiter{\okicmd@middle}{\mathrel}{%
   \mathrel{\left.\okicmd@kern\okicmd@vphantom{#3}\middle#2\okicmd@kern\right.}%
 }
+\okicmd@DeclareDelimiter{\okicmd@middlenoscale}{\mathrel}{%
+  \mathrel{\okicmd@kern{#2}\okicmd@kern}%
+}
 \okicmd@DeclareDelimiter{\okicmd@right}{\mathclose}{%
   \mathclose{\left.\okicmd@kern\okicmd@vphantom{#3}\right#2}%
 }
@@ -83,14 +86,17 @@
   \okicmd@right{#1}{#4}{#3}%
 }
 
-% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
-% #2: Left delimiter
-% #3: Left content
-% #4: Middle delimiter
-% #5: Right content
-% #6: Right delimiter
-\newcommand{\okicmd@parenwithmiddle}[6]{%
-  \okicmd@paren{#1}{#2}{#3\okicmd@middle{#1}{#4}{{#3}{#5}}#5}{#6}%
+% #1: Omit \middle if starred
+% #2: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
+% #3: Left delimiter
+% #4: Left content
+% #5: Middle delimiter
+% #6: Right content
+% #7: Right delimiter
+\NewDocumentCommand{\okicmd@parenwithmiddle}{smmmmmm}{%
+  \okicmd@paren{#2}{#3}{%
+    {#4}\IfBooleanTF{#1}{\okicmd@middlenoscale}{\okicmd@middle}{#2}{#5}{{#4}{#6}}#6%
+  }{#7}%
 }
 
 % #1: Macro name
@@ -102,16 +108,17 @@
   }%
 }
 
-% #1: Macro name
-% #2: Left delimiter
-% #3: Middle delimiter
-% #4: Right delimiter
-\newcommand{\DeclareParenthesisWithMiddle}[4]{%
-  \NewDocumentCommand{#1}{sO{\okicmd@auto}mo}{%
+% #1: Omit \middle if starred
+% #2: Macro name
+% #3: Left delimiter
+% #4: Middle delimiter
+% #5: Right delimiter
+\NewDocumentCommand{\DeclareParenthesisWithMiddle}{smmmm}{%
+  \NewDocumentCommand{#2}{sO{\okicmd@auto}mo}{%
     \IfValueTF{##4}{%
-      \okicmd@parenwithmiddle{##2}{#2}{##3}{#3}{\IfBooleanTF{##1}{\text{##4}}{##4}}{#4}%
+      \IfBooleanTF{#1}{\okicmd@parenwithmiddle*}{\okicmd@parenwithmiddle}{##2}{#3}{##3}{#4}{\IfBooleanTF{##1}{\text{##4}}{##4}}{#5}%
     }{%
-      \okicmd@paren{##2}{#2}{##3}{#4}%
+      \okicmd@paren{##2}{#3}{##3}{#5}%
     }%
   }%
 }
@@ -254,4 +261,4 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcommand{\Order}{\mathrm{O}}
 \newcommand{\order}{\mathrm{o}}
-\DeclareParenthesisWithMiddle{\condit}{.}{\vcentcolon}{.}
+\DeclareParenthesisWithMiddle*{\condit}{.}{\vcentcolon}{.}
