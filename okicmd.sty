@@ -1,23 +1,27 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2020/07/16 v0.8 by Taihei OKI]
+\ProvidesPackage{okicmd}[2021/02/02 v0.9 by Taihei OKI]
+
+% ======== Options ========
+\RequirePackage{kvoptions}
+\DeclareBoolOption[true]{loadpkgs}
+\DeclareComplementaryOption{noloadpkgs}{loadpkgs}
+\DeclareStringOption[vert]{middel}
+\ProcessKeyvalOptions*
 
 % Math commands & symbols
-\RequirePackage{amsmath}
-\RequirePackage{amssymb}
-\RequirePackage{bm}
-\RequirePackage{dsfont}
-\RequirePackage{mathtools}
-\RequirePackage{stmaryrd}
+\ifokicmd@loadpkgs
+  \RequirePackage{amsmath}
+  \RequirePackage{amssymb}
+  \RequirePackage{bm}
+  \RequirePackage{dsfont}
+  \RequirePackage{mathtools}
+  \RequirePackage{stmaryrd}
+\fi
 
 % For internal use
 \RequirePackage{xparse}
 \RequirePackage{xstring}
-
-% ======== Options ========
-\RequirePackage{kvoptions}
-\DeclareStringOption[vert]{middel}
-\ProcessKeyvalOptions*
 
 % ======== Letters ======
 \newcommand\okicmd@exchange[2]{\let\okicmd@tmp#1\let#1#2\let#2\okicmd@tmp}
