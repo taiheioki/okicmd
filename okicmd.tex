@@ -61,20 +61,24 @@ If a size option is missing, parentheses' size is adjusted automatically.
 
 \begin{center}
   \begin{tabular}{lcl} \toprule
-    \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}          \\\midrule
-    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{mleft}(\cs{cdot}\cs{mright})}                    \\
-    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                     \\
-    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                     \\
-    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                   \\
-    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ & \code{\cs{Biggl}(\cs{cdot}\cs{Biggr})}                   \\
-    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       & \code{\cs{mleft}\cs{}\{\cs{cdot}\cs{mright}\cs{}\}}        \\
-    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       & \code{\cs{mleft}\lbrack\cs{cdot}\cs{mright}\rbrack}        \\
-    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       & \cs{mleft}\cs{langle}\cs{cdot}\cs{mright}\cs{rangle}       \\
-    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       & \cs{mleft}\cs{llbracket}\cs{cdot}\cs{mright}\cs{rrbracket} \\
-    \cs{pipe}\Marg{\cs{cdot}}                & $\pipe{\cdot}$       & \code{\cs{mleft}|\cs{cdot}\cs{mright}|}                    \\
-    \cs{dbpp}\Marg{\cs{cdot}}                & $\dbpp{\cdot}$       & \code{\cs{mleft}\cs{}|\cs{cdot}\cs{mright}\cs{}|}          \\
-    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      & \cs{mleft}\cs{lfloor}\cs{cdot}\cs{might}\cs{rfloor}       \\
-    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       & \cs{mleft}\cs{lceil}\cs{cdot}\cs{mright}\cs{rceil}         \\
+    \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}                                 \\\midrule
+    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{mleft}(\cs{cdot}\cs{mright})}                                         \\
+    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                                            \\
+    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                                            \\
+    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                                          \\
+    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ & \code{\cs{Biggl}(\cs{cdot}\cs{Biggr})}                                          \\
+    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       & \code{\cs{mleft}\cs{}\{\cs{cdot}\cs{mright}\cs{}\}}                             \\
+    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       & \code{\cs{mleft}\lbrack\cs{cdot}\cs{mright}\rbrack}                             \\
+    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       & \cs{mleft}\cs{langle}\cs{cdot}\cs{mright}\cs{rangle}                            \\
+    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       & \cs{mleft}\cs{llbracket}\cs{cdot}\cs{mright}\cs{rrbracket}                      \\
+    \cs{pipe}\Marg{\cs{cdot}}                & $\pipe{\cdot}$       & \code{\cs{mleft}|\cs{cdot}\cs{mright}|}                                         \\
+    \cs{dbpp}\Marg{\cs{cdot}}                & $\dbpp{\cdot}$       & \code{\cs{mleft}\cs{}|\cs{cdot}\cs{mright}\cs{}|}                               \\
+    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      & \cs{mleft}\cs{lfloor}\cs{cdot}\cs{might}\cs{rfloor}                             \\
+    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       & \cs{mleft}\cs{lceil}\cs{cdot}\cs{mright}\cs{rceil}                              \\
+    \cs{pprn}\Marg{\cs{cdot}}                & $\pprn{\cdot}$       & \code{\cs{mleft}(\cs{mleft}(\cs{cdot}\cs{mright})\cs{mright})}                         \\
+    \cs{ccurl}\Marg{\cs{cdot}}               & $\ccurl{\cdot}$      & \code{\cs{mleft}\cs{}\{\cs{mleft}\cs{}\{\cs{cdot}\cs{mright}\cs{}\}\cs{mright}\cs{}\}} \\
+    \cs{ssqbr}\Marg{\cs{cdot}}               & $\ssqbr{\cdot}$      & \code{\cs{mleft}\lbrack\cs{mleft}\lbrack\cs{cdot}\cs{mright}\rbrack\cs{mright}\rbrack} \\
+    \cs{aagbr}\Marg{\cs{cdot}}               & $\aagbr{\cdot}$      & \begin{tabular}[l]{@{}l@{}}\cs{mleft}\cs{langle}\cs{mleft}\cs{langle}\\\code{ \cs{cdot}\cs{mright}\cs{rangle}\cs{mright}\cs{rangle}}\end{tabular} \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -169,9 +173,9 @@ If a size option is missing, parentheses' size is adjusted automatically.
     \cs{SO}\Darg{n}                            & $\SO(n)$            & \code{\cs{operatorname}\Marg{SO}(n)}                \\
     \cs{U}\Darg{n}                             & $\U(n)$             & \code{\cs{operatorname}\Marg{U}(n)}                 \\
     \cs{SU}\Darg{n}                            & $\SU(n)$            & \code{\cs{operatorname}\Marg{SU}(n)}                \\
-    \cs{GL}\Darg{q}                            & $\GL(q)$            & \code{\cs{operatorname}\Marg{GL}(q)}                \\
     \code{L \cs{extends} K}                    & $L \extends K$      & \code{L \cs{mathbin}\Marg{/} K}                     \\
     \cs{ch}\Darg{K}                            & $\ch(K)$            & \code{\cs{operatorname}\Marg{ch}(K)}                \\
+    \cs{GF}\Darg{2}                            & $\GF(2)$            & \code{\cs{operatorname}\Marg{GF}(2)}                \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -196,15 +200,19 @@ If a size option is missing, parentheses' size is adjusted automatically.
     \code{\cs{tr} A}                          & $\tr A$                      & \code{\cs{operatorname}\Marg{tr} A}             \\
     \code{\cs{rank} A}                        & $\rank A$                    & \code{\cs{operatorname}\Marg{rank} A}           \\
     \code{\cs{trank} A}                       & $\trank A$                   & \code{\cs{operatorname}\Marg{t-rank} A}         \\
+    \code{\cs{Det} A}                         & $\Det A$                     & \code{\cs{operatorname}\Marg{Det} A}            \\
     \code{\cs{Pf} A}                          & $\Pf A$                      & \code{\cs{operatorname}\Marg{Pf} A}             \\
+    \code{\cs{perm} A}                        & $\perm A$                    & \code{\cs{operatorname}\Marg{perm} A}           \\
+    \code{\cs{Hf} A}                          & $\Hf A$                      & \code{\cs{operatorname}\Marg{Hf} A}             \\
     \cs{diag}\Darg{a\_1,\cs{dotsc},a\_n}      & $\diag(a_1,\dotsc,a_n)$      & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname}\Marg{diag}}\\\code{ (a\_1,\cs{dotsc},a\_n)}\end{tabular}                      \\
     \cs{blockdiag}\Darg{A\_1,\cs{dotsc},A\_n} & $\blockdiag(A_1,\dotsc,A_n)$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname}\Marg{block-diag}}\\\code{ (A\_1,\cs{dotsc},A\_n)}\end{tabular}                      \\
     \cs{vectorize}\Darg{A}                    & $\vectorize(A)$              & \code{\cs{operatorname}\Marg{vectorize}(A)}     \\
     \cs{Row}\Darg{A}                          & $\Row(A)$                    & \code{\cs{operatorname}\Marg{Row}(A)}           \\
     \cs{Col}\Darg{A}                          & $\Col(A)$                    & \code{\cs{operatorname}\Marg{Col}(A)}           \\
-    \cs{onevec}                               & $\onevec$                    & \code{\cs{mathds}\Marg{1}}                      \\
     \cs{trsp}\Marg{A}                         & $\trsp{A}$                   & \code{A\string^\cs{top}}                        \\
     \cs{adjo}\Marg{A}                         & $\adjo{A}$                   & \code{A\string^*}                               \\
+    \cs{onevec}                               & $\onevec$                    & \code{\cs{mathds}\Marg{1}}                      \\
+    \cs{norm}\Marg{x}                         & $\norm{x}$                   & \code{\cs{mleft}\cs{}|x\cs{mright}\cs{}|} \\
     \cs{inpr}\Marg{x}\Marg{y}                 & $\inpr{x}{y}$                & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{langle}\{x\},\{y\}}\\\code{ \cs{right}\cs{rangle}}\end{tabular}                      \\
     \bottomrule
   \end{tabular}
@@ -253,8 +261,8 @@ If a size option is missing, parentheses' size is adjusted automatically.
     \code{\cs{argmax}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmax_{x \in S} f(x)$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname*}\Marg{arg\string~max}}\\\code{ \_\{x \cs{in} S\} f(x)}\end{tabular}             \\
     \cs{Order}\Darg{n}                                        & $\Order(n)$              & \code{\cs{mathrm}\Marg{O}(n)}          \\
     \cs{order}\Darg{n}                                        & $\order(n)$              & \code{\cs{mathrm}\Marg{o}(n)}          \\
-    \cs{poly}\Darg{n}                                         & $\poly(n)$               & \code{\cs{mathrm}\Marg{poly}(n)}       \\
-    \cs{polylog}\Darg{n}                                      & $\polylog(n)$            & \code{\cs{mathrm}\Marg{polylog}(n)}    \\
+    \cs{poly}\Darg{n}                                         & $\poly(n)$               & \code{\cs{operatorname}\Marg{poly}(n)}       \\
+    \cs{polylog}\Darg{n}                                      & $\polylog(n)$            & \code{\cs{operatorname}\Marg{polylog}(n)}    \\
     \bottomrule
   \end{tabular}
 \end{center}
