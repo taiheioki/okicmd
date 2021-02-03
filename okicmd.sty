@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2021/02/02 v0.9 by Taihei OKI]
+\ProvidesPackage{okicmd}[2021/02/03 v0.9 by Taihei OKI]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
@@ -208,6 +208,7 @@
 \DeclareMathOperator{\SU}{SU}
 
 \newcommand{\extends}{\mathbin{/}}
+\DeclareMathOperator{\ch}{ch}
 
 % ======== Number Theory ========
 \let\abs\pipe
@@ -265,4 +266,6 @@
 \DeclareMathOperator*{\argmax}{arg\,max}
 \newcommand{\Order}{\mathrm{O}}
 \newcommand{\order}{\mathrm{o}}
+\newcommand{\poly}{\mathrm{poly}}
+\newcommand{\polylog}{\mathrm{polylog}}
 \DeclareParenthesisWithMiddle*{\condit}{.}{\vcentcolon}{.}

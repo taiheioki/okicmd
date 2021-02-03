@@ -56,22 +56,25 @@
 \end{center}
 
 \subsection{Parentheses}
+Possible size options are \cs{big}, \cs{Big}, \cs{bigg}, and \cs{Bigg}.
+If a size option is missing, parentheses' size is adjusted automatically.
+
 \begin{center}
   \begin{tabular}{lcl} \toprule
     \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}          \\\midrule
-    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{left}(\cs{cdot}\cs{right})}                    \\
+    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{mleft}(\cs{cdot}\cs{mright})}                    \\
     \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                     \\
     \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                     \\
     \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                   \\
     \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ & \code{\cs{Biggl}(\cs{cdot}\cs{Biggr})}                   \\
-    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       & \code{\cs{left}\cs{}\{\cs{cdot}\cs{right}\cs{}\}}        \\
-    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       & \code{\cs{left}\lbrack\cs{cdot}\cs{right}\rbrack}        \\
-    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       & \cs{left}\cs{langle}\cs{cdot}\cs{right}\cs{rangle}       \\
-    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       & \cs{left}\cs{llbracket}\cs{cdot}\cs{right}\cs{rrbracket} \\
-    \cs{pipe}\Marg{\cs{cdot}}                & $\pipe{\cdot}$       & \code{\cs{left}|\cs{cdot}\cs{right}|}                    \\
-    \cs{dbpp}\Marg{\cs{cdot}}                & $\dbpp{\cdot}$       & \code{\cs{left}\cs{}|\cs{cdot}\cs{right}\cs{}|}          \\
-    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      & \cs{left}\cs{lfloor}\cs{cdot}\cs{right}\cs{rfloor}       \\
-    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       & \cs{left}\cs{lceil}\cs{cdot}\cs{right}\cs{rceil}         \\
+    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       & \code{\cs{mleft}\cs{}\{\cs{cdot}\cs{mright}\cs{}\}}        \\
+    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       & \code{\cs{mleft}\lbrack\cs{cdot}\cs{mright}\rbrack}        \\
+    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       & \cs{mleft}\cs{langle}\cs{cdot}\cs{mright}\cs{rangle}       \\
+    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       & \cs{mleft}\cs{llbracket}\cs{cdot}\cs{mright}\cs{rrbracket} \\
+    \cs{pipe}\Marg{\cs{cdot}}                & $\pipe{\cdot}$       & \code{\cs{mleft}|\cs{cdot}\cs{mright}|}                    \\
+    \cs{dbpp}\Marg{\cs{cdot}}                & $\dbpp{\cdot}$       & \code{\cs{mleft}\cs{}|\cs{cdot}\cs{mright}\cs{}|}          \\
+    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      & \cs{mleft}\cs{lfloor}\cs{cdot}\cs{might}\cs{rfloor}       \\
+    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       & \cs{mleft}\cs{lceil}\cs{cdot}\cs{mright}\cs{rceil}         \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -168,6 +171,7 @@
     \cs{SU}\Darg{n}                            & $\SU(n)$            & \code{\cs{operatorname}\Marg{SU}(n)}                \\
     \cs{GL}\Darg{q}                            & $\GL(q)$            & \code{\cs{operatorname}\Marg{GL}(q)}                \\
     \code{L \cs{extends} K}                    & $L \extends K$      & \code{L \cs{mathbin}\Marg{/} K}                     \\
+    \cs{ch}\Darg{K}                            & $\ch(K)$            & \code{\cs{operatorname}\Marg{ch}(K)}                \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -249,6 +253,8 @@
     \code{\cs{argmax}\_\string{x \cs{in} S\string} f\Darg{x}} & $\argmax_{x \in S} f(x)$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{operatorname*}\Marg{arg\string~max}}\\\code{ \_\{x \cs{in} S\} f(x)}\end{tabular}             \\
     \cs{Order}\Darg{n}                                        & $\Order(n)$              & \code{\cs{mathrm}\Marg{O}(n)}          \\
     \cs{order}\Darg{n}                                        & $\order(n)$              & \code{\cs{mathrm}\Marg{o}(n)}          \\
+    \cs{poly}\Darg{n}                                         & $\poly(n)$               & \code{\cs{mathrm}\Marg{poly}(n)}       \\
+    \cs{polylog}\Darg{n}                                      & $\polylog(n)$            & \code{\cs{mathrm}\Marg{polylog}(n)}    \\
     \bottomrule
   \end{tabular}
 \end{center}
