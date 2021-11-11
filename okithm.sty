@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2020/07/28 v0.8 by Taihei OKI]
+\ProvidesPackage{okithm}[2021/11/11 v0.9 by Taihei OKI]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
@@ -112,8 +112,17 @@
 \RequirePackage{array}
 \RequirePackage{xkeyval}
 
-\define@cmdkeys{Minimizekey}[optprob@]{name, variable}
+\define@cmdkeys{Minimizekey}[optprob@]{label,name,variable}
 \define@choicekey*{Minimizekey}{style}[\val]{short,long}{\def\optprob@style{\val}}
+
+% https://tex.stackexchange.com/questions/271062/labeling-a-text-and-referencing-it-later
+\MakeRobust{\ref}% avoid expanding it when in a textual label
+\newcommand{\labeltext}[2]{%
+  \@bsphack
+  \csname phantomsection\endcsname% in case hyperref is used
+  \def\@currentlabel{#1}{\label{#2}}%
+  \@esphack
+}
 
 \newcommand{\okithm@makeoptprob}[5]{%
   % #1 : options
@@ -122,13 +131,16 @@
   % #4 : subject to
   % #5 : constraints
   \setkeys{Minimizekey}{#1}%
+  \ifdefined\optprob@label
+    \labeltext{\optprob@name}{\optprob@label}%
+  \fi
   \begin{align}%
     \ifdefined\optprob@name%
-      \text{\optprob@name}\quad%
+      (\text{\optprob@name})\quad%
   	\fi%
     \begin{array}{|cl}%
       \ifdefined\optprob@variable%
-        $\underset{\optprob@variable}{\mathrm{#2}}$%
+        \underset{\optprob@variable}{\mathrm{#2}}%
       \else%
         \text{#2}%
       \fi%
@@ -137,6 +149,7 @@
       &$\begin{array}[t]{>{\displaystyle}l<{}>{\displaystyle}l<{}}#5\end{array}$%
     \end{array}%
   \end{align}%
+  \let\optprob@label\undefined%
   \let\optprob@name\undefined%
   \let\optprob@variable\undefined%
   \let\optprob@style\undefined%
