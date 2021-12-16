@@ -41,6 +41,20 @@
 
 \section{The \pkg*{okicmd} Package}
 
+\subsection{Options}
+Options can be passed as \cs{usepackage}\Oarg{\option{option1},\option{option2}}\Marg{okicmd}.
+
+\begin{center}
+  \begin{tabular}{lcl} \toprule
+    Option name            & Default?   & Description \\\midrule
+    \option{loadams}       & \checkmark & Load the \pkg*{amsmath} and \pkg*{amssymb} packages. \\
+    \option{noloadams}     &            & Stop loading the \pkg*{amsmath} and \pkg*{amssymb} packages. \\
+    \option{argminspace}   & \checkmark & Make short spaces after ``arg'' in \cs{argmin} and \cs{argmax}. \\
+    \option{noargminspace} &            & Stop making short spaces after ``arg'' in \cs{argmin} and \cs{argmax}. \\
+    \bottomrule
+  \end{tabular}
+\end{center}
+
 \subsection{Letters}
 \begin{center}
   \begin{tabular}{lcl} \toprule
@@ -56,29 +70,30 @@
 \end{center}
 
 \subsection{Parentheses}
-Possible size options are \cs{big}, \cs{Big}, \cs{bigg}, and \cs{Bigg}.
-If a size option is missing, parentheses' size is adjusted automatically.
+Possible size options are \cs{normal}, \cs{big}, \cs{Big}, \cs{bigg}, and \cs{Bigg}.
+If no size option is passed, parentheses' size is adjusted automatically by \cs{left} and \cs{right}.
 
 \begin{center}
   \begin{tabular}{lcl} \toprule
-    \multicolumn{1}{c}{Input}                & Output               & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}                                 \\\midrule
-    \cs{prn}\Marg{\cs{cdot}}                 & $\prn{\cdot}$        & \code{\cs{mleft}(\cs{cdot}\cs{mright})}                                         \\
-    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}  & $\prn[\big]{\cdot}$  & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                                            \\
-    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}  & $\prn[\Big]{\cdot}$  & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                                            \\
-    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}} & $\prn[\bigg]{\cdot}$ & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                                          \\
-    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}} & $\prn[\Bigg]{\cdot}$ & \code{\cs{Biggl}(\cs{cdot}\cs{Biggr})}                                          \\
-    \cs{curl}\Marg{\cs{cdot}}                & $\curl{\cdot}$       & \code{\cs{mleft}\cs{}\{\cs{cdot}\cs{mright}\cs{}\}}                             \\
-    \cs{sqbr}\Marg{\cs{cdot}}                & $\sqbr{\cdot}$       & \code{\cs{mleft}\lbrack\cs{cdot}\cs{mright}\rbrack}                             \\
-    \cs{agbr}\Marg{\cs{cdot}}                & $\agbr{\cdot}$       & \cs{mleft}\cs{langle}\cs{cdot}\cs{mright}\cs{rangle}                            \\
-    \cs{dbbr}\Marg{\cs{cdot}}                & $\dbbr{\cdot}$       & \cs{mleft}\cs{llbracket}\cs{cdot}\cs{mright}\cs{rrbracket}                      \\
-    \cs{pipe}\Marg{\cs{cdot}}                & $\pipe{\cdot}$       & \code{\cs{mleft}|\cs{cdot}\cs{mright}|}                                         \\
-    \cs{dbpp}\Marg{\cs{cdot}}                & $\dbpp{\cdot}$       & \code{\cs{mleft}\cs{}|\cs{cdot}\cs{mright}\cs{}|}                               \\
-    \cs{floor}\Marg{\cs{cdot}}               & $\floor{\cdot}$      & \cs{mleft}\cs{lfloor}\cs{cdot}\cs{might}\cs{rfloor}                             \\
-    \cs{ceil}\Marg{\cs{cdot}}                & $\ceil{\cdot}$       & \cs{mleft}\cs{lceil}\cs{cdot}\cs{mright}\cs{rceil}                              \\
-    \cs{pprn}\Marg{\cs{cdot}}                & $\pprn{\cdot}$       & \code{\cs{mleft}(\cs{mleft}(\cs{cdot}\cs{mright})\cs{mright})}                         \\
-    \cs{ccurl}\Marg{\cs{cdot}}               & $\ccurl{\cdot}$      & \code{\cs{mleft}\cs{}\{\cs{mleft}\cs{}\{\cs{cdot}\cs{mright}\cs{}\}\cs{mright}\cs{}\}} \\
-    \cs{ssqbr}\Marg{\cs{cdot}}               & $\ssqbr{\cdot}$      & \code{\cs{mleft}\lbrack\cs{mleft}\lbrack\cs{cdot}\cs{mright}\rbrack\cs{mright}\rbrack} \\
-    \cs{aagbr}\Marg{\cs{cdot}}               & $\aagbr{\cdot}$      & \begin{tabular}[l]{@{}l@{}}\cs{mleft}\cs{langle}\cs{mleft}\cs{langle}\\\code{ \cs{cdot}\cs{mright}\cs{rangle}\cs{mright}\cs{rangle}}\end{tabular} \\
+    \multicolumn{1}{c}{Input}                  & Output                 & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}                                 \\\midrule
+    \cs{prn}\Marg{\cs{cdot}}                   & $\prn{\cdot}$          & \code{\cs{left}(\cs{cdot}\cs{right})}                                         \\
+    \cs{prn}\Oarg{\cs{normal}}\Marg{\cs{cdot}} & $\prn[\normal]{\cdot}$ & \code{(\cs{cdot})}                                            \\
+    \cs{prn}\Oarg{\cs{big}}\Marg{\cs{cdot}}    & $\prn[\big]{\cdot}$    & \code{\cs{bigl}(\cs{cdot}\cs{bigr})}                                            \\
+    \cs{prn}\Oarg{\cs{Big}}\Marg{\cs{cdot}}    & $\prn[\Big]{\cdot}$    & \code{\cs{Bigl}(\cs{cdot}\cs{Bigr})}                                            \\
+    \cs{prn}\Oarg{\cs{bigg}}\Marg{\cs{cdot}}   & $\prn[\bigg]{\cdot}$   & \code{\cs{biggl}(\cs{cdot}\cs{biggr})}                                          \\
+    \cs{prn}\Oarg{\cs{Bigg}}\Marg{\cs{cdot}}   & $\prn[\Bigg]{\cdot}$   & \code{\cs{Biggl}(\cs{cdot}\cs{Biggr})}                                          \\
+    \cs{curl}\Marg{\cs{cdot}}                  & $\curl{\cdot}$         & \code{\cs{left}\cs{}\{\cs{cdot}\cs{right}\cs{}\}}                             \\
+    \cs{sqbr}\Marg{\cs{cdot}}                  & $\sqbr{\cdot}$         & \code{\cs{left}\lbrack\cs{cdot}\cs{right}\rbrack}                             \\
+    \cs{agbr}\Marg{\cs{cdot}}                  & $\agbr{\cdot}$         & \cs{left}\cs{langle}\cs{cdot}\cs{right}\cs{rangle}                            \\
+    \cs{dbbr}\Marg{\cs{cdot}}                  & $\dbbr{\cdot}$         & \cs{left}\cs{llbracket}\cs{cdot}\cs{right}\cs{rrbracket}                      \\
+    \cs{pipe}\Marg{\cs{cdot}}                  & $\pipe{\cdot}$         & \code{\cs{left}|\cs{cdot}\cs{right}|}                                         \\
+    \cs{dbpp}\Marg{\cs{cdot}}                  & $\dbpp{\cdot}$         & \code{\cs{left}\cs{}|\cs{cdot}\cs{right}\cs{}|}                               \\
+    \cs{floor}\Marg{\cs{cdot}}                 & $\floor{\cdot}$        & \cs{left}\cs{lfloor}\cs{cdot}\cs{might}\cs{rfloor}                             \\
+    \cs{ceil}\Marg{\cs{cdot}}                  & $\ceil{\cdot}$         & \cs{left}\cs{lceil}\cs{cdot}\cs{right}\cs{rceil}                              \\
+    \cs{pprn}\Marg{\cs{cdot}}                  & $\pprn{\cdot}$         & \code{\cs{left}(\cs{left}(\cs{cdot}\cs{right})\cs{right})}                         \\
+    \cs{ccurl}\Marg{\cs{cdot}}                 & $\ccurl{\cdot}$        & \code{\cs{left}\cs{}\{\cs{left}\cs{}\{\cs{cdot}\cs{right}\cs{}\}\cs{right}\cs{}\}} \\
+    \cs{ssqbr}\Marg{\cs{cdot}}                 & $\ssqbr{\cdot}$        & \code{\cs{left}\lbrack\cs{left}\lbrack\cs{cdot}\cs{right}\rbrack\cs{right}\rbrack} \\
+    \cs{aagbr}\Marg{\cs{cdot}}                 & $\aagbr{\cdot}$        & \begin{tabular}[l]{@{}l@{}}\cs{left}\cs{langle}\cs{left}\cs{langle}\\\code{ \cs{cdot}\cs{right}\cs{rangle}\cs{right}\cs{rangle}}\end{tabular} \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -100,7 +115,7 @@ If a size option is missing, parentheses' size is adjusted automatically.
 \begin{center}
   \begin{tabular}{lcl} \toprule
     \multicolumn{1}{c}{Input}                               & Output                   & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}     \\\midrule
-    \cs{set}\Marg{a \cs{in} S}                              & $\set{a \in S}$          & \code{\cs{left}\cs{\{}a \cs{in} S\cs{right}\cs{\}}} \\
+    \cs{set}\Marg{a, b, c}                                  & $\set{a, b, c}$          & \code{\cs{left}\cs{\{}a, b, c\cs{\}}} \\
     \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1}         & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
     \code{\cs{set}*\Marg{a}\Oarg{\string$a\string$ is odd}} & $\set*{a}[$a$ is odd]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}\cs{text}\Marg{\string$a\string$ is odd}\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
     \cs{card}\Marg{X}                                       & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
@@ -212,7 +227,7 @@ If a size option is missing, parentheses' size is adjusted automatically.
     \cs{trsp}\Marg{A}                         & $\trsp{A}$                   & \code{A\string^\cs{top}}                        \\
     \cs{adjo}\Marg{A}                         & $\adjo{A}$                   & \code{A\string^*}                               \\
     \cs{onevec}                               & $\onevec$                    & \code{\cs{mathds}\Marg{1}}                      \\
-    \cs{norm}\Marg{x}                         & $\norm{x}$                   & \code{\cs{mleft}\cs{}|x\cs{mright}\cs{}|} \\
+    \cs{norm}\Marg{x}                         & $\norm{x}$                   & \code{\cs{left}\cs{}|x\cs{right}\cs{}|} \\
     \cs{inpr}\Marg{x}\Marg{y}                 & $\inpr{x}{y}$                & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{langle}\{x\},\{y\}}\\\code{ \cs{right}\cs{rangle}}\end{tabular}                      \\
     \bottomrule
   \end{tabular}
@@ -253,7 +268,9 @@ If a size option is missing, parentheses' size is adjusted automatically.
   \end{tabular}
 \end{center}
 
-\subsection{Optimization}
+\subsection{Computer Science, Optimization}
+Spaces after ``arg'' in \cs{argmin} and \cs{argmax} are omitted by passing the \option{noargminspace} option.
+
 \begin{center}
   \begin{tabular}{lcl} \toprule
     \multicolumn{1}{c}{Input}                                 & Output                   & \multicolumn{1}{c}{\LaTeX\ equivalent} \\\midrule

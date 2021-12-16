@@ -1,12 +1,13 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okicmd}[2021/02/03 v0.9 by Taihei OKI]
+\ProvidesPackage{okicmd}[2021/11/16 v1.0 by Taihei OKI]
 
 % Options
 \RequirePackage{kvoptions}
 \DeclareBoolOption[true]{loadams}
 \DeclareComplementaryOption{noloadams}{loadams}
-\DeclareStringOption[vert]{middel}
+\DeclareBoolOption[true]{argminspace}
+\DeclareComplementaryOption{noargminspace}{argminspace}
 \ProcessKeyvalOptions*
 
 % Math commands & symbols
@@ -37,8 +38,8 @@
 \let\ell\okicmd@l
 
 % ======== Parentheses ========
-\newcommand{\okicmd@auto}{okicmd@auto}     % Adjust size using \left and \right
-\newcommand{\okicmd@normal}{okicmd@normal} % Normal parenthesis size
+\newcommand{\okicmd@auto}{okicmd@auto} % Adjust size using \left and \right
+\newcommand{\normal}{okicmd@normal}    % Normal parenthesis size
 \newcommand{\okicmd@vphantom}[1]{%
   \vphantom{\bgroup%
     \catcode`\&=9%
@@ -56,7 +57,7 @@
     \makeatletter%
     \IfStrEq{##1##2}{\okicmd@auto##2}{%
       #3%
-    }{\IfStrEq{##1##2}{\okicmd@normal##2}{%
+    }{\IfStrEq{##1##2}{\normal##2}{%
       #2##2%
     }{%
       #2{##1##2}%
@@ -65,11 +66,14 @@
   }%
 }
 
-% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
+% #1: Size (\okicmd@auto, \normal, \big, \Big, \bigg, or \Bigg)
 % #2: Delimiter
 % #3: Content
 \okicmd@DeclareDelimiter{\okicmd@left}{\mathopen}{%
   \mathopen{\left#2\okicmd@vphantom{#3}\okicmd@kern\right.}%
+}
+\okicmd@DeclareDelimiter{\okicmd@leftnokern}{\mathopen}{%
+  \mathopen{\left#2\okicmd@vphantom{#3}\right.}%
 }
 \okicmd@DeclareDelimiter{\okicmd@middle}{\mathrel}{%
   \mathrel{\left.\okicmd@kern\okicmd@vphantom{#3}\middle#2\okicmd@kern\right.}%
@@ -80,8 +84,11 @@
 \okicmd@DeclareDelimiter{\okicmd@right}{\mathclose}{%
   \mathclose{\left.\okicmd@kern\okicmd@vphantom{#3}\right#2}%
 }
+\okicmd@DeclareDelimiter{\okicmd@rightnokern}{\mathclose}{%
+  \mathclose{\left.\okicmd@vphantom{#3}\right#2}%
+}
 
-% #1: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
+% #1: Size (\okicmd@auto, \normal, \big, \Big, \bigg, or \Bigg)
 % #2: Left delimiter
 % #3: Content
 % #4: Right delimiter
@@ -91,15 +98,25 @@
   \okicmd@right{#1}{#4}{#3}%
 }
 
+% #1: Size (\okicmd@auto, \normal, \big, \Big, \bigg, or \Bigg)
+% #2: Left delimiter
+% #3: Content
+% #4: Right delimiter
+\newcommand{\okicmd@parennokern}[4]{%
+  \okicmd@leftnokern{#1}{#2}{#3}%
+  #3%
+  \okicmd@rightnokern{#1}{#4}{#3}%
+}
+
 % #1: Omit \middle if starred
-% #2: Size (\okicmd@auto, \okicmd@normal, \big, \Big, \bigg, or \Bigg)
+% #2: Size (\okicmd@auto, \normal, \big, \Big, \bigg, or \Bigg)
 % #3: Left delimiter
 % #4: Left content
 % #5: Middle delimiter
 % #6: Right content
 % #7: Right delimiter
 \NewDocumentCommand{\okicmd@parenwithmiddle}{smmmmmm}{%
-  \okicmd@paren{#2}{#3}{%
+  \okicmd@parennokern{#2}{#3}{%
     {#4}\IfBooleanTF{#1}{\okicmd@middlenoscale}{\okicmd@middle}{#2}{#5}{{#4}{#6}}#6%
   }{#7}%
 }
@@ -279,8 +296,8 @@
 \DeclareMathOperator*{\Res}{Res}
 
 % ======== Optimization ========
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\ifokicmd@argminspace\,\fi min}
+\DeclareMathOperator*{\argmax}{arg\ifokicmd@argminspace\,\fi max}
 \newcommand{\Order}{\mathrm{O}}
 \newcommand{\order}{\mathrm{o}}
 \DeclareMathOperator{\poly}{poly}
