@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2021/11/11 v0.9 by Taihei OKI]
+\ProvidesPackage{okithm}[2022/01/26 v0.10 by Taihei OKI]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
@@ -14,72 +14,196 @@
 \DeclareComplementaryOption{noenumitem}{enumitem}
 \ProcessKeyvalOptions*
 
+% ======== Translation ========
+\RequirePackage{translations}
+
+\ProvideTranslation{English}{theorem}{Theorem}
+\ProvideTranslation{English}{lemma}{Lemma}
+\ProvideTranslation{English}{corollary}{Corollary}
+\ProvideTranslation{English}{proposition}{Proposition}
+\ProvideTranslation{English}{definition}{Definition}
+\ProvideTranslation{English}{example}{Example}
+\ProvideTranslation{English}{remark}{Remark}
+\ProvideTranslation{English}{proof}{Proof}
+
+\ProvideTranslation{Japanese}{equation}{式}
+\ProvideTranslation{Japanese}{figure}{図}
+\ProvideTranslation{Japanese}{table}{表}
+\ProvideTranslation{Japanese}{page}{ページ}
+\ProvideTranslation{Japanese}{part}{部}
+\ProvideTranslation{Japanese}{chapter}{章}
+\ProvideTranslation{Japanese}{section}{節}
+\ProvideTranslation{Japanese}{appendix}{付録}
+\ProvideTranslation{Japanese}{enumi}{項}
+\ProvideTranslation{Japanese}{footnote}{脚注}
+\ProvideTranslation{Japanese}{theorem}{定理}
+\ProvideTranslation{Japanese}{lemma}{補題}
+\ProvideTranslation{Japanese}{corollary}{系}
+\ProvideTranslation{Japanese}{proposition}{命題}
+\ProvideTranslation{Japanese}{definition}{定義}
+\ProvideTranslation{Japanese}{result}{結果}
+\ProvideTranslation{Japanese}{example}{例}
+\ProvideTranslation{Japanese}{remark}{注}
+\ProvideTranslation{Japanese}{note}{ノート}
+\ProvideTranslation{Japanese}{algorithm}{アルゴリズム}
+\ProvideTranslation{Japanese}{listing}{リスト}
+\ProvideTranslation{Japanese}{line}{行}
+\ProvideTranslation{Japanese}{proof}{証明}
+
+\@ifpackageloaded{cleveref}{%
+  \newcommand{\okithm@crefname}[1]{%
+    \crefformat{#1}{%
+      \GetTranslationFor{japanese}{#1}\nobreak##2##1##3%
+    }
+    \crefrangeformat{#1}{%
+      \GetTranslationFor{japanese}{#1}\nobreak##3##1##4\crefrangeconjunction\nobreak##5##2##6%
+    }
+    \crefmultiformat{#1}{%
+      \GetTranslationFor{japanese}{#1}\nobreak##2##1##3%
+    }{%
+      \crefpairconjunction\nobreak##2##1##3%
+    }{%
+      \crefmiddleconjunction\nobreak##2##1##3%
+    }{%
+      \creflastconjunction\nobreak##2##1##3%
+    }
+    \crefrangemultiformat{#1}{%
+      \GetTranslationFor{japanese}{#1}\nobreak##3##1##4\crefrangeconjunction\nobreak##5##2##6%
+    }{%
+      \crefpairconjunction\nobreak##3##1##4\crefrangeconjunction\nobreak##5##2##6%
+    }{%
+      \crefmiddleconjunction\nobreak##3##1##4\crefrangeconjunction\nobreak##5##2##6%
+    }{%
+      \creflastconjunction\nobreak##3##1##4\crefrangeconjunction\nobreak##5##2##6%
+    }
+  }
+  \newcommand{\okithm@crefnametranspose}[1]{%
+    \crefformat{#1}{%
+      ##2##1##3\nobreak\GetTranslationFor{japanese}{#1}
+    }
+    \crefrangeformat{#1}{%
+      ##3##1##4\nobreak\crefrangeconjunction##5##2##6\nobreak\GetTranslationFor{japanese}{#1}%
+    }
+    \crefmultiformat{#1}{%
+      ##2##1##3\nobreak%
+    }{%
+      \crefpairconjunction##2##1##3\nobreak\GetTranslationFor{japanese}{#1}%
+    }{%
+      \crefmiddleconjunction##2##1##3\nobreak%
+    }{%
+      \creflastconjunction##2##1##3\nobreak\GetTranslationFor{japanese}{#1}%
+    }
+    \crefrangemultiformat{#1}{%
+      ##3##1##4\nobreak\crefrangeconjunction##5##2##6\nobreak%
+    }{%
+      \crefpairconjunction##3##1##4\nobreak\crefrangeconjunction##5##2##6\nobreak\GetTranslationFor{japanese}{#1}%
+    }{%
+      \crefmiddleconjunction##3##1##4\nobreak\crefrangeconjunction##5##2##6\nobreak%
+    }{%
+      \creflastconjunction##3##1##4\nobreak\crefrangeconjunction##5##2##6\nobreak\GetTranslationFor{japanese}{#1}%
+    }
+  }
+  \cref@addlanguagedefs{japanese}{%
+    \def\crefrangeconjunction{--}
+    \def\crefpairconjunction{および}
+    \def\crefmiddleconjunction{, }
+    \def\creflastconjunction{，および}
+    %
+    \okithm@crefname{equation}
+    \okithm@crefname{figure}
+    \okithm@crefname{table}
+    \okithm@crefnametranspose{page}
+    \okithm@crefnametranspose{part}
+    \okithm@crefnametranspose{section}
+    \okithm@crefnametranspose{chapter}
+    \okithm@crefname{appendix}
+    \okithm@crefname{enumi}
+    \okithm@crefname{footnote}
+    \okithm@crefname{theorem}
+    \okithm@crefname{lemma}
+    \okithm@crefname{corollary}
+    \okithm@crefname{proposition}
+    \okithm@crefname{definition}
+    \okithm@crefname{result}
+    \okithm@crefname{example}
+    \okithm@crefname{remark}
+    \okithm@crefname{note}
+    \okithm@crefname{algorithm}
+    \okithm@crefname{listing}
+    \okithm@crefname{line}
+  }
+}{}
+
 % ======== Theorems ========
 \ifokithm@theorems
   \RequirePackage{amsthm}
   \RequirePackage{thmtools}
-  \RequirePackage{translations}
 
-  \ProvideTranslation{English}{theorem}{Theorem}
-  \ProvideTranslation{English}{definition}{Definition}
-  \ProvideTranslation{English}{lemma}{Lemma}
-  \ProvideTranslation{English}{proposition}{Proposition}
-  \ProvideTranslation{English}{corollary}{Corollary}
-  \ProvideTranslation{English}{example}{Example}
-  \ProvideTranslation{English}{remark}{Remark}
-  \ProvideTranslation{English}{proof}{Proof}
+  \newcommand{\okithm@headpunct}{\protect\ifcurrentlanguage{japanese}{．}{.}}
+  \newcommand{\okithm@notebracesleft}{\protect\ifcurrentlanguage{japanese}{\unskip（}{(}}
+  \newcommand{\okithm@notebracesright}{\protect\ifcurrentlanguage{japanese}{）\unskip}{)}}
 
-  \ProvideTranslation{Japanese}{theorem}{定理}
-  \ProvideTranslation{Japanese}{definition}{定義}
-  \ProvideTranslation{Japanese}{lemma}{補題}
-  \ProvideTranslation{Japanese}{proposition}{命題}
-  \ProvideTranslation{Japanese}{corollary}{系}
-  \ProvideTranslation{Japanese}{example}{例}
-  \ProvideTranslation{Japanese}{proof}{証明}
+  \declaretheoremstyle[%
+    headpunct=\okithm@headpunct,
+    notebraces={\okithm@notebracesleft}{\okithm@notebracesright}
+  ]{okithm@defstyle}
 
-  \declaretheoremstyle{okithm@defstyle}
-  \declaretheoremstyle[qed=\qedsymbol]{okicmd@exstyle}
+  \declaretheoremstyle[%
+    bodyfont={\protect\ifcurrentlanguage{english}{\normalfont\itshape}{}},
+    headpunct=\okithm@headpunct,
+    notebraces={\okithm@notebracesleft}{\okithm@notebracesright}
+  ]{okithm@thmstyle}
 
-  \ifcurrentlanguage{Japanese}{%
-    \declaretheoremstyle{okicmd@thmstyle}
-    \declaretheoremstyle[qed=\qedsymbol]{okicmd@proofstyle}
-  }{%
-    \declaretheoremstyle[bodyfont=\normalfont\itshape]{okicmd@thmstyle}
-    \declaretheoremstyle[headfont=\normalfont\itshape,qed=\qedsymbol]{okicmd@proofstyle}
+  \declaretheoremstyle[%
+    headpunct=\okithm@headpunct,
+    notebraces={\okithm@notebracesleft}{\okithm@notebracesright},
+    qed=\qedsymbol
+  ]{okithm@exstyle}
+
+  \declaretheoremstyle[%
+    headfont={\protect\ifcurrentlanguage{english}{\normalfont\itshape}{}},
+    headpunct=\okithm@headpunct,
+    notebraces={\okithm@notebracesleft}{\okithm@notebracesright},
+    qed=\qedsymbol
+  ]{okithm@proofstyle}
+
+  \newcommand{\okithm@theoremname}[1]{
+    \protect\GetTranslation{#1}%
+    \protect\ifcurrentlanguage{japanese}{\ignorespaces}{}%
   }
 
   \declaretheorem[%
-    name=\protect\GetTranslation{theorem},%
-    style=okicmd@thmstyle,%
+    name=\okithm@theoremname{theorem},%
+    style=okithm@thmstyle,%
     numberwithin=\okithm@numberwithin%
   ]{theorem}
   \declaretheorem[%
-    name=\protect\GetTranslation{definition},%
+    name=\okithm@theoremname{lemma},%
+    style=okithm@thmstyle,%
+    sibling=theorem%
+  ]{lemma}
+  \declaretheorem[%
+    name=\okithm@theoremname{corollary},%
+    style=okithm@thmstyle,%
+    sibling=theorem%
+  ]{corollary}
+  \declaretheorem[%
+    name=\okithm@theoremname{proposition},%
+    style=okithm@thmstyle,%
+    sibling=theorem%
+  ]{proposition}
+  \declaretheorem[%
+    name=\okithm@theoremname{definition},%
     style=okithm@defstyle,%
     sibling=theorem%
   ]{definition}
   \declaretheorem[%
-    name=\protect\GetTranslation{lemma},%
-    style=okicmd@thmstyle,%
-    sibling=theorem%
-  ]{lemma}
-  \declaretheorem[%
-    name=\protect\GetTranslation{proposition},%
-    style=okicmd@thmstyle,%
-    sibling=theorem%
-  ]{proposition}
-  \declaretheorem[%
-    name=\protect\GetTranslation{corollary},%
-    style=okicmd@thmstyle,%
-    sibling=theorem%
-  ]{corollary}
-  \declaretheorem[%
-    name=\protect\GetTranslation{example},%
-    style=okicmd@exstyle,%
+    name=\okithm@theoremname{example},%
+    style=okithm@exstyle,%
     sibling=theorem%
   ]{example}
   \declaretheorem[%
-    name=\protect\GetTranslation{remark},%
+    name=\okithm@theoremname{remark},%
     style=okithm@defstyle,%
     sibling=theorem%
   ]{remark}
@@ -87,8 +211,8 @@
   \let\proof\@undefined
   \let\endproof\@undefined
   \declaretheorem[%
-    name=\protect\GetTranslation{proof},%
-    style=okicmd@proofstyle,%
+    name=\okithm@theoremname{proof},%
+    style=okithm@proofstyle,%
     numbered=no%
   ]{proof}
 \fi
