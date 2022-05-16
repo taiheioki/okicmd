@@ -1,6 +1,6 @@
 % !TEX encoding = UTF-8 Unicode
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesPackage{okithm}[2022/01/26 v0.10 by Taihei OKI]
+\ProvidesPackage{okithm}[2022/05/16 v0.11 by Taihei OKI]
 
 % ======== Options ========
 \RequirePackage{kvoptions}
@@ -167,7 +167,7 @@
     qed=\qedsymbol
   ]{okithm@proofstyle}
 
-  \newcommand{\okithm@theoremname}[1]{
+  \newcommand{\okithm@theoremname}[1]{%
     \protect\GetTranslation{#1}%
     \protect\ifcurrentlanguage{japanese}{\ignorespaces}{}%
   }
