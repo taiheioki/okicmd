@@ -116,24 +116,24 @@ If no size option is passed, parentheses' size is adjusted automatically by \cs{
     \multicolumn{1}{c}{Input}                               & Output                   & \multicolumn{1}{c}{\LaTeX\ (almost) equivalent}     \\\midrule
     \cs{set}\Marg{a, b, c}                                  & $\set{a, b, c}$          & \code{\cs{left}\cs{\{}a, b, c\cs{\}}} \\
     \cs{set}\Marg{a \cs{in} S}\Oarg{a\string^2 = 1}         & $\set{a \in S}[a^2 = 1]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a \cs{in} S\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}a\string^2 = 1\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
-    \code{\cs{set}*\Marg{a}\Oarg{\string$a\string$ is odd}} & $\set*{a}[$a$ is odd]$ & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}\cs{text}\Marg{\string$a\string$ is odd}\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
+    \code{\cs{set}*\Marg{a}\Oarg{\string$a\string$ is odd}} & $\set*{a}[$a$ is odd]$   & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{\{}a\cs{mathrel}\Marg{}\cs{middle}|}\\\code{ \cs{mathrel}\Marg{}\cs{text}\Marg{\string$a\string$ is odd}\cs{right}\cs{\}}}\end{tabular}                           \\ % chktex 44
     \cs{card}\Marg{X}                                       & $\card{X}$               & \code{\cs{left}|X\cs{right}|}                       \\
     \code{X \cs{symdif} Y}                                  & $X \symdif Y$            & \code{X \cs{mathbin}\Marg{\cs{triangle}} Y}         \\
-    \cs{setN}                                               & $\setN$                  & \cs{mathbb}\Marg{N}                                 \\
-    \cs{setZ}                                               & $\setZ$                  & \cs{mathbb}\Marg{Z}                                 \\
-    \cs{setQ}                                               & $\setQ$                  & \cs{mathbb}\Marg{Q}                                 \\
-    \cs{setR}                                               & $\setR$                  & \cs{mathbb}\Marg{R}                                 \\
-    \cs{setC}                                               & $\setC$                  & \cs{mathbb}\Marg{C}                                 \\
+    \cs{N}                                                  & $\N$                     & \cs{mathbb}\Marg{N}                                 \\
+    \cs{Z}                                                  & $\Z$                     & \cs{mathbb}\Marg{Z}                                 \\
+    \cs{Q}                                                  & $\Q$                     & \cs{mathbb}\Marg{Q}                                 \\
+    \cs{R}                                                  & $\R$                     & \cs{mathbb}\Marg{R}                                 \\
+    \cs{C}                                                  & $\C$                     & \cs{mathbb}\Marg{C}                                 \\
+    \cs{Zp}                                                 & $\Zp$                    & \code{\cs{mathbb}\Marg{Z}\_\{\cs{ge}0\}}            \\
+    \cs{Qp}                                                 & $\Qp$                    & \code{\cs{mathbb}\Marg{Q}\_\{\cs{ge}0\}}            \\
+    \cs{Rp}                                                 & $\Rp$                    & \code{\cs{mathbb}\Marg{R}\_\{\cs{ge}0\}}            \\
+    \cs{Npp}                                                & $\Npp$                   & \code{\cs{mathbb}\Marg{N}\_\{>0\}}                  \\
+    \cs{Zpp}                                                & $\Zpp$                   & \code{\cs{mathbb}\Marg{Z}\_\{>0\}}                  \\
+    \cs{Qpp}                                                & $\Qpp$                   & \code{\cs{mathbb}\Marg{Q}\_\{>0\}}                  \\
+    \cs{Rpp}                                                & $\Rpp$                   & \code{\cs{mathbb}\Marg{R}\_\{>0\}}                  \\
     \cs{setH}                                               & $\setH$                  & \cs{mathbb}\Marg{H}                                 \\
     \cs{setF}                                               & $\setF$                  & \cs{mathbb}\Marg{F}                                 \\
     \cs{setK}                                               & $\setK$                  & \cs{mathbb}\Marg{K}                                 \\
-    \cs{setZp}                                              & $\setZp$                 & \code{\cs{mathbb}\Marg{Z}\_\{\cs{ge}0\}}            \\
-    \cs{setQp}                                              & $\setQp$                 & \code{\cs{mathbb}\Marg{Q}\_\{\cs{ge}0\}}            \\
-    \cs{setRp}                                              & $\setRp$                 & \code{\cs{mathbb}\Marg{R}\_\{\cs{ge}0\}}            \\
-    \cs{setNpp}                                             & $\setNpp$                & \code{\cs{mathbb}\Marg{N}\_\{>0\}}                  \\
-    \cs{setZpp}                                             & $\setZpp$                & \code{\cs{mathbb}\Marg{Z}\_\{>0\}}                  \\
-    \cs{setQpp}                                             & $\setQpp$                & \code{\cs{mathbb}\Marg{Q}\_\{>0\}}                  \\
-    \cs{setRpp}                                             & $\setRpp$                & \code{\cs{mathbb}\Marg{R}\_\{>0\}}                  \\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -225,7 +225,7 @@ If no size option is passed, parentheses' size is adjusted automatically by \cs{
     \cs{Col}\Darg{A}                          & $\Col(A)$                    & \code{\cs{operatorname}\Marg{Col}(A)}           \\
     \cs{trsp}\Marg{A}                         & $\trsp{A}$                   & \code{A\string^\cs{top}}                        \\
     \cs{adjo}\Marg{A}                         & $\adjo{A}$                   & \code{A\string^*}                               \\
-    \cs{onevec}                               & $\onevec$                    & \code{\cs{mathds}\Marg{1}}                      \\
+    \cs{ones}                                 & $\ones$                      & \code{\cs{mathds}\Marg{1}}                      \\
     \cs{norm}\Marg{x}                         & $\norm{x}$                   & \code{\cs{left}\cs{}|x\cs{right}\cs{}|} \\
     \cs{inpr}\Marg{x}\Marg{y}                 & $\inpr{x}{y}$                & \begin{tabular}[l]{@{}l@{}}\code{\cs{left}\cs{langle}\{x\},\{y\}}\\\code{ \cs{right}\cs{rangle}}\end{tabular}                      \\
     \bottomrule
@@ -330,7 +330,7 @@ You can disable algorithms by setting the option \option{noalgorithm}.
 
 \begin{cnltxexample}
   \begin{algorithmic}[1]
-    \Input{$n \in \setN$}
+    \Input{$n \in \N$}
     \Output{$n(n+1)/2$}
     \State{$s \gets 0$}
     \ForTo{$i = 1$}{$n$}
